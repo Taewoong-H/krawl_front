@@ -4,7 +4,7 @@ const UserRanking = ({users}) => {
         <p>랭킹</p>
         {users.list.map(user => {
           return (
-            <div>
+            <div key={user.id}>
               <p>#{user.id}</p>
               <p>{user.profileImage}</p>
               <p>{user.name}</p>

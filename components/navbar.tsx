@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const NavBar = () => {
+const NavBar = ({isCookie}) => {
   return (
     <nav>
       <div className="logo">
@@ -11,9 +11,12 @@ const NavBar = () => {
           <p>내 포인트 ###점</p>
         </div>
         <div className='login'>
-          <Link href="/login">
-            <a><p>로그인</p></a>
-          </Link>
+          {isCookie ?
+            <p>로그아웃</p> :
+            <Link href="/login">
+              <a><p>로그인</p></a>
+            </Link>
+          }
         </div>
       </div>
       <style jsx>
