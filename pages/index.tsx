@@ -1,9 +1,11 @@
 import type { NextPage } from 'next';
+import NavBar from '../components/navbar';
 import Seo from '../components/seo';
 import Competition from '../components/home/competition';
 import ContentList from '../components/home/contentList';
 import WinnerContent from '../components/home/winnerContent';
 import UserRanking from '../components/home/ranking';
+import { GetServerSideProps } from 'next'
 
 const contentData = {
   list: [
@@ -56,10 +58,11 @@ const userRankingData = {
   ]
 }
 
-const Home: NextPage = () => {
+const Home: NextPage = ({isCookie}) => {
   return (
     <div>
       <Seo title="home"></Seo>
+      <NavBar isCookie={isCookie}></NavBar>
       <main>
         <Competition></Competition>
         <div className='home-list'>
@@ -93,4 +96,13 @@ const Home: NextPage = () => {
   );
 };
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  let isCookie = false
+  if (context.req.cookies.accessToken !== undefined) {
+    isCookie = true
+  }
+  return {
+    props: {isCookie},
+  }
+}
 export default Home;

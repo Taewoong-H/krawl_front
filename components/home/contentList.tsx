@@ -3,7 +3,7 @@ const ContentList = ({content}) => {
       <div>
         {content.list.map(item => {
           return (
-            <div>
+            <div key={item.id}>
               <p>{item.url}</p>
               <p>{item.raw_date}</p>
             </div>
