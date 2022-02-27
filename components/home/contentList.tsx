@@ -1,14 +1,15 @@
 const ContentList = (content: any) => {
+    console.log(content)
     return (
       <div>
-        {content.list ? content.list.map((item: any) => {
+        {content.content.map((item: any) => {
           return (
             <div key={item.id}>
               <p>{item.url}</p>
               <p>{item.raw_date}</p>
             </div>
           )
-        }): ''}
+        })}
         <style jsx>
           {`
             

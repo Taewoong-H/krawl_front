@@ -7,8 +7,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        destination: 'https://krawl-backend.herokuapp.com/:path*',
         source: '/api/:path*',
+        destination: 'https://krawl-backend.herokuapp.com/:path*',
       },
     ];
   }

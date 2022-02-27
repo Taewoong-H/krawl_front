@@ -1,11 +1,12 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, GetServerSideProps, NextPage } from 'next';
 import NavBar from '../components/navbar';
 import Seo from '../components/seo';
 import Competition from '../components/home/competition';
 import ContentList from '../components/home/contentList';
 import WinnerContent from '../components/home/winnerContent';
 import UserRanking from '../components/home/ranking';
-import { GetServerSideProps } from 'next'
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const contentData = {
   list: [
@@ -58,17 +59,18 @@ const userRankingData = {
   ]
 }
 
-const Home: NextPage = (isCookie) => {
+const Home: NextPage = (props: any) => {
+  console.log(props.response)
   return (
     <div>
       <Seo title="home"></Seo>
-      <NavBar isCookie={isCookie}></NavBar>
+      <NavBar isCookie={props.isCookie}></NavBar>
       <main>
         <Competition></Competition>
         <div className='home-list'>
           <div className='content-list'>
             <WinnerContent winnerContent={winnerContentData}></WinnerContent>
-            <ContentList content={contentData}></ContentList>
+            <ContentList content={props.response}></ContentList>
           </div>
           <UserRanking users={userRankingData}></UserRanking>
         </div>
@@ -101,8 +103,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (context.req.cookies.accessToken !== undefined) {
     isCookie = true
   }
+
+  const response = await (await fetch(`https://krawl-backend.herokuapp.com/contents`)).json()
+  console.log(response)
   return {
-    props: {isCookie},
+    props: {
+      isCookie,
+      response
+    },
   }
 }
+
 export default Home;
