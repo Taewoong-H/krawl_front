@@ -1,16 +1,43 @@
-html,
+/* html,
 body {
-  padding: 10px;
-  margin: 10px;
+  padding: 0;
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+} */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+/* @font-face {
+  font-family: 'paybooc-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../public/fonts/NotoSansCJKkr-Light.otf');
+  src: url('../public/fonts/NotoSansCJKkr-Medium.otf') format('otf'),
+    url('../public/fonts/NotoSansCJKkr-Regular.otf') format('otf'),
+    url('../public/fonts/NotoSansCJKkr-Thin.otf') format('otf'),
+    url('../public/fonts/NotoSansCJKkr-Bold.otf') format('otf');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+} */
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* background: linear-gradient(#2b1055, #7597de); */
 }

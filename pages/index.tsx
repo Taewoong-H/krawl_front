@@ -62,15 +62,30 @@ const Home: NextPage = () => {
       <Seo title="home"></Seo>
       <main>
         <Competition></Competition>
-        <div>
-          <WinnerContent winnerContent={winnerContentData}></WinnerContent>
-          <ContentList content={contentData}></ContentList>
+        <div className='home-list'>
+          <div className='content-list'>
+            <WinnerContent winnerContent={winnerContentData}></WinnerContent>
+            <ContentList content={contentData}></ContentList>
+          </div>
+          <UserRanking users={userRankingData}></UserRanking>
         </div>
-        <UserRanking users={userRankingData}></UserRanking>
       </main>
       <style jsx>
         {`
           main {
+            display: flex;
+            min-width: 960px;  
+            justify-content: center;
+            flex-direction: column;
+            margin: 10px;
+          }
+          .home-list {
+            display: flex;
+            width: 100%;
+          }
+          .content-list {
+            padding: 1.25rem;
+            width: 80%;
           }
         `}
       </style>
