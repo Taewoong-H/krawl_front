@@ -10,12 +10,12 @@ function setToken(accessToken: string, refreshToken: string) {
   cookie.save('accessToken', accessToken, {
     path: '/',
     expires,
-    httpOnly: process.env.HTTP_ONLY, // dev/prod 에 따라 true / false 로 받게 했다.
+    httpOnly: false, // dev/prod 에 따라 true / false 로 받게 했다.
   });
   cookie.save('refreshToken', refreshToken, {
     path: '/',
     expires,
-    httpOnly: process.env.HTTP_ONLY,
+    httpOnly: false,
   });
 }
 

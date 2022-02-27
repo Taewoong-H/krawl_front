@@ -1,4 +1,4 @@
-const WinnerContent = ({ winnerContent }) => {
+const WinnerContent = (winnerContent: any) => {
     return (
       <div className="winner-content-list">
         <p>📌지난 투표 기간에 1위를 한 콘텐츠</p>
@@ -10,7 +10,7 @@ const WinnerContent = ({ winnerContent }) => {
           {`
             .winner-content-list {
               padding: 0.5rem;
-              
+
             }
           `}
         </style>

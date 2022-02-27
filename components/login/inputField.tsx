@@ -10,7 +10,7 @@ export const InputField = ({
   field,
   form: _,
   ...props
-}: FieldProps & InputProps) => {
+}: FieldProps & InputProps & any) => {
   return (
     <div className='input-container'>
       <div className='label'>{props.label}</div>

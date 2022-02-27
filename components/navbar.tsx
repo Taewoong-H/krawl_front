@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const NavBar = ({isCookie}) => {
+const NavBar = (isCookie: any) => {
   return (
     <nav>
       <div className="logo">

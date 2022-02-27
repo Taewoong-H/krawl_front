@@ -58,7 +58,7 @@ const userRankingData = {
   ]
 }
 
-const Home: NextPage = ({isCookie}) => {
+const Home: NextPage = (isCookie) => {
   return (
     <div>
       <Seo title="home"></Seo>

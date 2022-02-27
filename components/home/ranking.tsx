@@ -1,8 +1,8 @@
-const UserRanking = ({users}) => {
+const UserRanking = (users: any) => {
     return (
       <div>
         <p>랭킹</p>
-        {users.list.map(user => {
+        {users.list ? users.list.map((user: any) => {
           return (
             <div key={user.id}>
               <p>#{user.id}</p>
@@ -10,7 +10,7 @@ const UserRanking = ({users}) => {
               <p>{user.name}</p>
             </div>
           )
-        })}
+        }): ''}
         <style jsx>
           {`
             
