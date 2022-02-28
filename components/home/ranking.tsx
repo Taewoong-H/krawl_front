@@ -5,8 +5,8 @@ const UserRanking = (users: any) => {
       <ul className="list-group">
         {users.users.map((user: any, index: any) => {
           return (
-            <li className="list-group-item">
-              <div key={user.user_id}>
+            <li className="list-group-item" key={user.user_id}>
+              <div>
                 <p>{index + 1}등</p>
                 <p>{user.profileImage}</p>
                 <p>{user.nickname}</p>

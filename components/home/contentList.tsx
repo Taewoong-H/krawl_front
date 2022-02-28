@@ -3,8 +3,8 @@ const ContentList = (content: any) => {
     <ul className="list-group">
       {content.content.map((item: any) => {
         return (
-          <li className="list-group-item">
-            <div className="media" key={item.id}>
+          <li className="list-group-item" key={item.id}>
+            <div className="media">
               <div className="media-left">
                 <a href="#">
                   <img className="media-object" src="..." alt="..." />
