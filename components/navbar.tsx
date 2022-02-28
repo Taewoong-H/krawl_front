@@ -6,17 +6,20 @@ const NavBar = (isCookie: any) => {
       <div className="logo">
         <p>끌올</p>
       </div>
-      <div className='user-info'>
-        <div className='point'>
+      <div className="user-info">
+        <div className="point">
           <p>내 포인트 ###점</p>
         </div>
-        <div className='login'>
-          {isCookie ?
-            <p>로그아웃</p> :
+        <div className="login">
+          {isCookie.isCookie ? (
+            <p>로그아웃</p>
+          ) : (
             <Link href="/login">
-              <a><p>로그인</p></a>
+              <a>
+                <p>로그인</p>
+              </a>
             </Link>
-          }
+          )}
         </div>
       </div>
       <style jsx>
@@ -46,6 +49,6 @@ const NavBar = (isCookie: any) => {
       </style>
     </nav>
   );
-}
+};
 
-export default NavBar
+export default NavBar;

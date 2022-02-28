@@ -13,73 +13,72 @@ const contentData = {
     {
       id: 1,
       url: 'www.krawl.xyz',
-      raw_date: '2022-02-26'
+      raw_date: '2022-02-26',
     },
     {
       id: 2,
       url: 'www.naver.com',
-      raw_date: '2022-02-27'
-    }
-  ]
-}
+      raw_date: '2022-02-27',
+    },
+  ],
+};
 
 const winnerContentData = {
   id: 1,
   url: 'www.krawl.xyz',
-  raw_date: '2022-02-26'
-}
+  raw_date: '2022-02-26',
+};
 
 const userRankingData = {
   list: [
     {
       id: 1,
       profile_image: '/image/1',
-      name: '유저이름'
+      name: '유저이름',
     },
     {
       id: 2,
       profile_image: '/image/1',
-      name: '유저이름'
+      name: '유저이름',
     },
     {
       id: 3,
       profile_image: '/image/1',
-      name: '유저이름'
+      name: '유저이름',
     },
     {
       id: 4,
       profile_image: '/image/1',
-      name: '유저이름'
+      name: '유저이름',
     },
     {
       id: 5,
       profile_image: '/image/1',
-      name: '유저이름'
-    }
-  ]
-}
+      name: '유저이름',
+    },
+  ],
+};
 
 const Home: NextPage = (props: any) => {
-  console.log(props.response)
   return (
     <div>
       <Seo title="home"></Seo>
       <NavBar isCookie={props.isCookie}></NavBar>
       <main>
         <Competition></Competition>
-        <div className='home-list'>
-          <div className='content-list'>
+        <div className="home-list">
+          <div className="content-list">
             <WinnerContent winnerContent={winnerContentData}></WinnerContent>
-            <ContentList content={props.response}></ContentList>
+            <ContentList content={props.contentRes}></ContentList>
           </div>
-          <UserRanking users={userRankingData}></UserRanking>
+          <UserRanking users={props.rankRes}></UserRanking>
         </div>
       </main>
       <style jsx>
         {`
           main {
             display: flex;
-            min-width: 960px;  
+            min-width: 960px;
             justify-content: center;
             flex-direction: column;
             margin: 10px;
@@ -99,19 +98,31 @@ const Home: NextPage = (props: any) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  let isCookie = false
+  let isCookie = false;
+  console.log(context.req);
   if (context.req.cookies.accessToken !== undefined) {
-    isCookie = true
+    isCookie = true;
   }
+  const tokenSplit = context.req.cookies.accessToken.split('"');
+  const token = tokenSplit[3];
+  const userInfoRes = await (
+    await fetch(`https://krawl-backend.herokuapp.com/accounts/navbar`, {
+      headers: { Authorization: `Token ${token}` },
+    })
+  ).text();
+  console.log(userInfoRes);
 
-  const response = await (await fetch(`https://krawl-backend.herokuapp.com/contents`)).json()
-  console.log(response)
+  const contentRes = await (await fetch(`https://krawl-backend.herokuapp.com/contents`)).json();
+  const rankRes = await (await fetch(`https://krawl-backend.herokuapp.com/accounts/rankings`)).json();
+
   return {
     props: {
       isCookie,
-      response
+      contentRes,
+      rankRes,
+      userInfoRes,
     },
-  }
-}
+  };
+};
 
 export default Home;
