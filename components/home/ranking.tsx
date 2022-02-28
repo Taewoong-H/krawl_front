@@ -1,16 +1,20 @@
 const UserRanking = (users: any) => {
   return (
     <div>
-      <p>랭킹</p>
-      {users.users.map((user: any) => {
-        return (
-          <div key={user.user_id}>
-            <p>#{user.user_id}</p>
-            <p>{user.profileImage}</p>
-            <p>{user.nickname}</p>
-          </div>
-        );
-      })}
+      <h4>랭킹</h4>
+      <ul className="list-group">
+        {users.users.map((user: any, index: any) => {
+          return (
+            <li className="list-group-item" key={user.user_id}>
+              <div>
+                <p>{index + 1}등</p>
+                <p>{user.profileImage}</p>
+                <p>{user.nickname}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
       <style jsx>{``}</style>
     </div>
   );

@@ -1,16 +1,25 @@
 const ContentList = (content: any) => {
   return (
-    <div>
+    <ul className="list-group">
       {content.content.map((item: any) => {
         return (
-          <div key={item.id}>
-            <p>{item.url}</p>
-            <p>{item.raw_date}</p>
-          </div>
+          <li className="list-group-item" key={item.id}>
+            <div className="media">
+              <div className="media-left">
+                <a href="#">
+                  <img className="media-object" src="..." alt="..." />
+                </a>
+              </div>
+              <div className="media-body">
+                <h4 className="media-heading">{item.url}</h4>
+                <p>{item.raw_date}</p>
+              </div>
+            </div>
+          </li>
         );
       })}
       <style jsx>{``}</style>
-    </div>
+    </ul>
   );
 };
 

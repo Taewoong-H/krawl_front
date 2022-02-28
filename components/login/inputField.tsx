@@ -1,19 +1,12 @@
 import { FieldProps } from 'formik';
 import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
-type InputProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
+type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-export const InputField = ({
-  field,
-  form: _,
-  ...props
-}: FieldProps & InputProps & any) => {
+export const InputField = ({ field, form: _, ...props }: FieldProps & InputProps & any) => {
   return (
-    <div className='input-container'>
-      <div className='label'>{props.label}</div>
+    <div className="input-container">
+      <div className="label">{props.label}</div>
       <input
         style={{
           backgroundImage: `url(${
@@ -50,6 +43,10 @@ export const InputField = ({
             color: #333;
             line-height: 1.5;
             padding-left: 7px;
+            text-align: left;
+          }
+          hr {
+            margin: 0;
           }
         `}
       </style>

@@ -10,11 +10,14 @@ import Link from 'next/link';
 const Login: NextPage = () => {
   const router = useRouter();
   return (
-    <div className='login-container'>
-      <div className='login-wrapper'>
-        <div className='login-form'>
-          <div className='login-title'>
-            Login <p className='logo'>끌올</p>
+    <div className="login-container">
+      <div className="login-wrapper">
+        <div className="login-form">
+          <div className="login-title">
+            Login
+            <Link href="/#">
+              <h2 className="logo">끌올</h2>
+            </Link>
           </div>
           <Formik
             initialValues={{
@@ -23,20 +26,13 @@ const Login: NextPage = () => {
               password: '',
             }}
             validationSchema={Yup.object().shape({
-              email: Yup.string()
-                .email('Email is invalid')
-                .required('Email is required'),
-              password: Yup.string()
-                .min(1, 'Password must be at least 1 characters')
-                .required('Password is required'),
+              email: Yup.string().email('Email is invalid').required('Email is required'),
+              password: Yup.string().min(1, 'Password must be at least 1 characters').required('Password is required'),
             })}
             onSubmit={async (values) => {
-              values.username = values.email
+              values.username = values.email;
               try {
-                const response = await axios.post(
-                  '/api/login',
-                  values
-                );
+                const response = await axios.post('/api/login', values);
                 const token = response.data;
                 if (token) {
                   setToken(token, token);
@@ -70,46 +66,41 @@ const Login: NextPage = () => {
                   className='invalid-feedback'
                 /> */}
                 <Field
-                  id='email'
-                  name='email'
-                  type='email'
-                  label='Email Address'
-                  placeholder='email'
-                  className={
-                    'form-control' +
-                    (errors.email && touched.email ? ' is-invalid' : '')
-                  }
+                  id="email"
+                  name="email"
+                  type="email"
+                  label="Email Address"
+                  placeholder="email"
+                  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
                   component={InputField}
                 />
-                <ErrorMessage
-                  name='email'
-                  component='div'
-                  className='invalid-feedback'
-                />
+                <ErrorMessage name="email" component="div" className="invalid-feedback" />
                 <Field
-                  id='password'
-                  name='password'
-                  label='Password'
-                  placeholder='password'
-                  type='password'
+                  id="password"
+                  name="password"
+                  label="Password"
+                  placeholder="password"
+                  type="password"
                   component={InputField}
                 />
-                <ErrorMessage
-                  name='password'
-                  component='div'
-                  className='invalid-feedback'
-                />
-                <button className='login-button' type='submit'>LOGIN</button>
+                <ErrorMessage name="password" component="div" className="invalid-feedback" />
+                <button className="login-button" type="submit">
+                  LOGIN
+                </button>
               </Form>
             )}
           </Formik>
         </div>
-        <div className='link-container'>
+        <div className="link-container">
           <Link href="/register">
-            <a><p>Create new account</p></a>
+            <a>
+              <p>Create new account</p>
+            </a>
           </Link>
           <Link href="#">
-            <a><p>Forgot password</p></a>
+            <a>
+              <p>Forgot password</p>
+            </a>
           </Link>
         </div>
       </div>
@@ -124,9 +115,6 @@ const Login: NextPage = () => {
             min-height: 100vh;
             width: 100%;
           }
-          .logo {
-            font-size: 1.25rem;
-          }
           .login-wrapper {
             width: 550px;
             height: 550px;
@@ -134,8 +122,7 @@ const Login: NextPage = () => {
             color: rgb(255, 255, 255);
             transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
             border-radius: 16px;
-            box-shadow: rgb(0 0 0 / 70%) 0px 0px 1px 0px,
-              rgb(0 0 0 / 50%) 0px 3px 4px -2px;
+            box-shadow: rgb(0 0 0 / 70%) 0px 0px 1px 0px, rgb(0 0 0 / 50%) 0px 3px 4px -2px;
             background-image: none;
             overflow: hidden;
             padding: 65px 55px 55px 55px;
@@ -151,6 +138,9 @@ const Login: NextPage = () => {
             text-align: center;
             font-weight: bold;
             margin: 10px 0;
+          }
+          .logo {
+            cursor: pointer;
           }
           .login-button {
             font-family: Roboto;
@@ -179,11 +169,10 @@ const Login: NextPage = () => {
             flex-direction: column;
             align-items: flex-end;
           }
-
         `}
       </style>
     </div>
   );
 };
-  
-  export default Login;
+
+export default Login;
