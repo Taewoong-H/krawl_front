@@ -1,4 +1,5 @@
 import type { GetStaticProps, GetServerSideProps, NextPage } from 'next';
+import ogs from 'open-graph-scraper'
 import NavBar from '../components/navbar';
 import Seo from '../components/seo';
 import Competition from '../components/home/competition';
@@ -22,7 +23,7 @@ const Home: NextPage = (props: any) => {
         <div className="row">
           <div className="col-xs-12 col-md-8">
             <WinnerContent winnerContent={winnerContentData}></WinnerContent>
-            <ContentList content={props.contentRes}></ContentList>
+            <ContentList content={props.contentResult}></ContentList>
           </div>
           <div className="col-xs-6 col-md-4">
             <UserRanking users={props.rankRes}></UserRanking>
@@ -42,21 +43,30 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const tokenSplit = context.req.cookies.accessToken.split('"');
     const token = tokenSplit[3];
     userInfoRes = await (
-      await fetch(`https://krawl-backend.herokuapp.com/accounts/navbar`, {
+      await fetch(`${process.env.API_URL}/accounts/navbar`, {
         headers: { Authorization: `Token ${token}`, Accept: 'application/json' },
       })
     ).json();
   }
 
-  console.log(userInfoRes);
+  const contentRes = await (await fetch(`${process.env.API_URL}/contents`)).json();
+  const contentResult = await Promise.all(contentRes.map(async (content: any) => {
+    const options = { url: content.url }
+    let ogImage = ''
+    await ogs(options, (error: boolean, results: any, response) => {
+      if (!error) {
+        ogImage = results.ogImage.url
+      }
+    })
+    return {...content, ogImage}
+  }))
 
-  const contentRes = await (await fetch(`https://krawl-backend.herokuapp.com/contents`)).json();
-  const rankRes = await (await fetch(`https://krawl-backend.herokuapp.com/accounts/rankings`)).json();
+  const rankRes = await (await fetch(`${process.env.API_URL}/accounts/rankings`)).json();
 
   return {
     props: {
       isCookie,
-      contentRes,
+      contentResult,
       rankRes,
       userInfoRes,
     },
