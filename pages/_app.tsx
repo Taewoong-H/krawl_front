@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
+    <>
       <Component {...pageProps} />
       <footer>
         <p>
@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           }
         `}
       </style>
-    </Layout>
+    </>
   );
 }
 

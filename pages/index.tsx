@@ -4,26 +4,37 @@ import NavBar from '../components/navbar';
 import Seo from '../components/seo';
 import Competition from '../components/home/competition';
 import ContentList from '../components/home/contentList';
-import WinnerContent from '../components/home/winnerContent';
-import UserRanking from '../components/home/ranking';
+import Pagination from '../components/home/pagination';
+// import WinnerContent from '../components/home/winnerContent';
+// import UserRanking from '../components/home/ranking';
 
 const Home: NextPage = (props: any) => {
   return (
-    <div>
+    <div className='container-lg'>
       <Seo title="home"></Seo>
       <NavBar isCookie={props.isCookie}></NavBar>
       <main>
         <Competition></Competition>
         <div className="row">
-          <div className="col-xs-12 col-md-8">
+          <div>
             {/* <WinnerContent winnerContent={winnerContentData}></WinnerContent> */}
             <ContentList content={props.contentResult}></ContentList>
           </div>
-          <div className="col-xs-6 col-md-4">
+          {/* <div className="col-xs-6 col-md-4">
             <UserRanking users={props.rankRes}></UserRanking>
-          </div>
+          </div> */}
         </div>
       </main>
+      <Pagination pages={props.pages}></Pagination>
+      <style jsx>
+        {`
+          @media (min-width: 768px) {
+            .layout {
+              max-width: 960px;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
@@ -47,13 +58,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const contentResult = await Promise.all(contentRes.results.map(async (content: any) => {
     const options = { url: content.url }
     let ogImage = ''
+    let ogTitle = ''
     await ogs(options, (error: boolean, results: any, response) => {
       if (!error) {
         ogImage = results.ogImage.url
+        ogTitle = results.ogTitle
       }
     })
-    return {...content, ogImage}
+    return {...content, ogImage, ogTitle}
   }))
+  const pages = contentRes.count % contentRes.results.length === 0 ? contentRes.count / contentRes.results.length : contentRes.count / contentRes.results.length + 1
 
   const rankRes = await (await fetch(`${process.env.API_URL}/accounts/rankings`)).json();
 
@@ -63,6 +77,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       contentResult,
       rankRes,
       userInfoRes,
+      pages
     },
   };
 };

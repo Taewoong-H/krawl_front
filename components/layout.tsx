@@ -6,7 +6,7 @@ export default function Layout({ children }: any) {
         {`
           @media (min-width: 768px) {
             .container {
-              max-width: 730px;
+              max-width: 960px;
             }
           }
         `}
