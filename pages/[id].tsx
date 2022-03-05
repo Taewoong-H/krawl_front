@@ -1,16 +1,29 @@
-import type { NextPage, GetServerSideProps } from 'next';
+import type { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import ogs from 'open-graph-scraper';
 import NavBar from '../components/navbar';
 import Seo from '../components/seo';
 import Competition from '../components/home/competition';
 import ContentList from '../components/home/contentList';
 import Pagination from '../components/home/pagination';
+import { useEffect, useState } from 'react';
+import { getCookie } from 'cookies-next';
 
 const HomePage: NextPage = (props: any) => {
+  const [userInfo, setUserInfo] = useState({ nickname: '', profileImage: '', point: 0 });
+  useEffect(() => {
+    // Perform localStorage action
+    const userToken = localStorage.getItem('userToken');
+    if (userToken && typeof userToken === 'string') {
+      setUserInfo({ nickname: '', profileImage: userToken, point: 0 });
+    } else {
+      // const tokenString = getCookie('accessToken');
+      // userInfo into localStorage
+    }
+  }, []);
   return (
     <div className="container-lg">
       <Seo title="home"></Seo>
-      <NavBar isCookie={props.userInfoRes}></NavBar>
+      <NavBar isCookie={userInfo}></NavBar>
       <main>
         <Competition></Competition>
         <div className="row">
@@ -32,21 +45,14 @@ const HomePage: NextPage = (props: any) => {
     </div>
   );
 };
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [{ params: { id: '1' } }, { params: { id: '2' } }, { params: { id: '3' } }],
+    fallback: false, // false or 'blocking'
+  };
+};
 
-export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  let isCookie = false;
-  let userInfoRes = {};
-
-  if (context.req.cookies.accessToken !== undefined) {
-    isCookie = true;
-    const tokenSplit = context.req.cookies.accessToken.split('"');
-    const token = tokenSplit[3];
-    userInfoRes = await (
-      await fetch(`${process.env.API_URL}/accounts/navbar`, {
-        headers: { Authorization: `Token ${token}`, Accept: 'application/json' },
-      })
-    ).json();
-  }
+export const getStaticProps: GetStaticProps = async (context: any) => {
   const contentRes = await (await fetch(`${process.env.API_URL}/contents?page=${context.params.id}`)).json();
   const contentResult = await Promise.all(
     contentRes.results.map(async (content: any) => {
@@ -78,7 +84,6 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
       // isCookie,
       contentRes,
       contentResult,
-      userInfoRes,
       pages,
     },
   };

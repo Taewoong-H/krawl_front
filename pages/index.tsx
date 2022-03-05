@@ -11,10 +11,18 @@ import { useState, useEffect } from 'react';
 // import UserRanking from '../components/home/ranking';
 
 const Home: NextPage = (props: any) => {
+  let userInfo = { nickname: '', profileImage: '', point: 0 };
+  const tokenString = getCookie('accessToken');
+  if (tokenString && typeof tokenString === 'string') {
+    const splitTokenString = tokenString.split('"');
+    const userToken = splitTokenString[3];
+    userInfo = { nickname: '', profileImage: userToken, point: 0 };
+    localStorage.setItem('userToken', userToken);
+  }
   return (
     <div className="container-lg">
       <Seo title="home"></Seo>
-      <NavBar isCookie={props.userInfoRes}></NavBar>
+      <NavBar isCookie={userInfo}></NavBar>
       <main>
         <Competition></Competition>
         <div className="row">
@@ -37,20 +45,20 @@ const Home: NextPage = (props: any) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  let isCookie = false;
-  let userInfoRes = {};
+export const getStaticProps: GetStaticProps = async () => {
+  // let isCookie = false;
+  // let userInfoRes = {};
 
-  if (context.req.cookies.accessToken !== undefined) {
-    isCookie = true;
-    const tokenSplit = context.req.cookies.accessToken.split('"');
-    const token = tokenSplit[3];
-    userInfoRes = await (
-      await fetch(`${process.env.API_URL}/accounts/navbar`, {
-        headers: { Authorization: `Token ${token}`, Accept: 'application/json' },
-      })
-    ).json();
-  }
+  // if (context.req.cookies.accessToken !== undefined) {
+  //   isCookie = true;
+  //   const tokenSplit = context.req.cookies.accessToken.split('"');
+  //   const token = tokenSplit[3];
+  //   userInfoRes = await (
+  //     await fetch(`${process.env.API_URL}/accounts/navbar`, {
+  //       headers: { Authorization: `Token ${token}`, Accept: 'application/json' },
+  //     })
+  //   ).json();
+  // }
 
   const contentRes = await (await fetch(`${process.env.API_URL}/contents`)).json();
   const contentResult = await Promise.all(
@@ -69,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   );
   let pages = 0;
   if (contentRes.next === null) {
-    pages = Number(context.params.id);
+    pages = 1;
   } else {
     pages =
       contentRes.count % contentRes.results.length === 0
@@ -79,10 +87,10 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 
   return {
     props: {
-      isCookie,
+      // isCookie,
       contentRes,
       contentResult,
-      userInfoRes,
+      // userInfoRes,
       pages,
     },
   };

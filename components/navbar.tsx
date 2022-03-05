@@ -9,7 +9,7 @@ const NavBar = (userInfo: any) => {
             <p>내 포인트 ###점</p>
           </li>
           <li className="presentation">
-            {userInfo.isCookie.nickname ? (
+            {userInfo.nickname ? (
               <p>로그아웃</p>
             ) : (
               <Link href="/login">
