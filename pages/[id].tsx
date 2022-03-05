@@ -34,11 +34,11 @@ const HomePage: NextPage = (props: any) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [{ params: { id: '1' } }, { params: { id: '2' } }, { params: { id: '3' } }],
-    fallback: true, // false or 'blocking'
+    fallback: false, // false or 'blocking'
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context: any) => {
   const contentRes = await (await fetch(`${process.env.API_URL}/contents?page=${context.params.id}`)).json();
   const contentResult = await Promise.all(
     contentRes.results.map(async (content: any) => {
