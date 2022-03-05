@@ -1,10 +1,24 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Pagination = ({ pages }: any) => {
+  const router = useRouter();
   const totalPage = [];
   for (let i = 0; i < parseInt(pages); i++) {
     totalPage.push(i + 1);
   }
+
+  const goPage = (page: any) => {
+    router.push(
+      {
+        pathname: `/${page}`,
+        query: {
+          userId: '1',
+        },
+      },
+      `/${page}`
+    );
+  };
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination justify-content-center">
@@ -14,12 +28,11 @@ const Pagination = ({ pages }: any) => {
           </a>
         </li>
         {totalPage.map((page: any) => {
-          const pageLink = `/${String(page)}`;
           return (
             <li className="page-item" key={page}>
-              <Link href={pageLink}>
-                <a className="page-link">{page}</a>
-              </Link>
+              <a className="page-link" onClick={() => goPage(page)}>
+                {page}
+              </a>
             </li>
           );
         })}
@@ -29,6 +42,13 @@ const Pagination = ({ pages }: any) => {
           </a>
         </li>
       </ul>
+      <style jsx>
+        {`
+          .page-item {
+            cursor: pointer;
+          }
+        `}
+      </style>
     </nav>
   );
 };

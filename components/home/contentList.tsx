@@ -4,7 +4,6 @@ const ContentList = ({ content }: any) => {
   return (
     <>
       {content.map((item: any) => {
-        console.log(item);
         const today = new Date();
         const itemDate = new Date(item.raw_date);
         const calcYear = today.getFullYear() - itemDate.getFullYear();
@@ -18,15 +17,15 @@ const ContentList = ({ content }: any) => {
                 <div className="card-body">
                   <h5 className="card-title">{item.ogTitle}</h5>
                   <p className="card-text">{item.opinion}</p>
-                  <div className="card-user row">
+                  <div className="card-user row ms-1">
                     <Image
                       src={item.current_user.profile_img}
                       alt="profile-image"
                       className="profile-image col"
-                      width={50}
-                      height={50}
+                      width={35}
+                      height={35}
                     ></Image>
-                    <p className="col">{item.current_user.nickname}</p>
+                    <p className="col mb-0">{item.current_user.nickname}</p>
                   </div>
                 </div>
                 <div className="calc-year">무려 {calcYear}년전 발행</div>

@@ -34,9 +34,15 @@ const Login: NextPage = () => {
               try {
                 const response = await axios.post('/api/login', values);
                 const token = response.data;
+                const nickName = response.data.nickname;
+                const profileImage = response.data.profile_img;
+                const userId = response.data.user_id;
                 if (token) {
                   setToken(token, token);
                   alert('로그인 성공');
+                  localStorage.setItem('nickname', nickName);
+                  localStorage.setItem('profileImage', profileImage);
+                  localStorage.setItem('userId', userId);
                   router.push('/');
                 } else {
                   alert('이메일 또는 비밀번호를 확인해주세요.');

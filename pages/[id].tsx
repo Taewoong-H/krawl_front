@@ -7,19 +7,23 @@ import ContentList from '../components/home/contentList';
 import Pagination from '../components/home/pagination';
 import { useEffect, useState } from 'react';
 import { getCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
 
 const HomePage: NextPage = (props: any) => {
-  const [userInfo, setUserInfo] = useState({ nickname: '', profileImage: '', point: 0 });
+  const router = useRouter();
+  const [userInfo, setUserInfo] = useState({ nickname: '', profileImage: '', userId: '' });
   useEffect(() => {
-    // Perform localStorage action
-    const userToken = localStorage.getItem('userToken');
-    if (userToken && typeof userToken === 'string') {
-      setUserInfo({ nickname: '', profileImage: userToken, point: 0 });
+    const nickname = localStorage.getItem('nickname');
+    const profileImage = localStorage.getItem('profileImage');
+    const userId = localStorage.getItem('userId');
+    if (nickname && typeof nickname === 'string' && typeof profileImage === 'string' && typeof userId === 'string') {
+      setUserInfo({ nickname: nickname, profileImage: profileImage, userId: userId });
     } else {
-      // const tokenString = getCookie('accessToken');
-      // userInfo into localStorage
+      alert('재로그인 하세요.');
+      router.push('/login');
     }
   }, []);
+
   return (
     <>
       <Seo title="home"></Seo>

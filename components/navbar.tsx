@@ -1,6 +1,12 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { removeCookies } from 'cookies-next';
 
 const NavBar = ({ userInfo }: any) => {
+  const logout = () => {
+    localStorage.clear();
+    removeCookies('accessToken');
+  };
   return (
     <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
       <Link href="/#">
@@ -10,9 +16,19 @@ const NavBar = ({ userInfo }: any) => {
       </Link>
       {userInfo.nickname ? (
         <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-          <a className="me-3 py-2 text-dark text-decoration-none">이름</a>
-          <a className="me-3 py-2 text-dark text-decoration-none">내 포인트 ###점</a>
-          <a className="py-2 text-dark text-decoration-none">로그아웃</a>
+          <a className="me-0 py-1 text-dark text-decoration-none">
+            <Image
+              src={userInfo.profileImage}
+              alt="profile-image"
+              className="profile-image col"
+              width={35}
+              height={35}
+            ></Image>
+          </a>
+          <a className="me-2 py-1 text-dark text-decoration-none">{userInfo.nickname}</a>
+          <a className="py-2 text-dark text-decoration-none logout" onClick={logout}>
+            로그아웃
+          </a>
         </nav>
       ) : (
         <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
@@ -28,6 +44,9 @@ const NavBar = ({ userInfo }: any) => {
           }
           a {
             padding: 0 10px !important;
+          }
+          .logout {
+            cursor: pointer;
           }
         `}
       </style>
