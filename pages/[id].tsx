@@ -1,5 +1,6 @@
-import type { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import ogs from 'open-graph-scraper';
+import NavBar from '../components/navbar';
 import Seo from '../components/seo';
 import Competition from '../components/home/competition';
 import ContentList from '../components/home/contentList';
@@ -9,6 +10,7 @@ const HomePage: NextPage = (props: any) => {
   return (
     <div className="container-lg">
       <Seo title="home"></Seo>
+      <NavBar isCookie={props.userInfoRes}></NavBar>
       <main>
         <Competition></Competition>
         <div className="row">
@@ -31,14 +33,20 @@ const HomePage: NextPage = (props: any) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [{ params: { id: '1' } }, { params: { id: '2' } }, { params: { id: '3' } }],
-    fallback: false, // false or 'blocking'
-  };
-};
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
+  let isCookie = false;
+  let userInfoRes = {};
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+  if (context.req.cookies.accessToken !== undefined) {
+    isCookie = true;
+    const tokenSplit = context.req.cookies.accessToken.split('"');
+    const token = tokenSplit[3];
+    userInfoRes = await (
+      await fetch(`${process.env.API_URL}/accounts/navbar`, {
+        headers: { Authorization: `Token ${token}`, Accept: 'application/json' },
+      })
+    ).json();
+  }
   const contentRes = await (await fetch(`${process.env.API_URL}/contents?page=${context.params.id}`)).json();
   const contentResult = await Promise.all(
     contentRes.results.map(async (content: any) => {
@@ -54,16 +62,23 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       return { ...content, ogImage, ogTitle };
     })
   );
-  const pages =
-    contentRes.count % contentRes.results.length === 0
-      ? contentRes.count / contentRes.results.length
-      : contentRes.count / contentRes.results.length + 1;
+
+  let pages = 0;
+  if (contentRes.next === null) {
+    pages = Number(context.params.id);
+  } else {
+    pages =
+      contentRes.count % contentRes.results.length === 0
+        ? contentRes.count / contentRes.results.length
+        : contentRes.count / contentRes.results.length + 1;
+  }
 
   return {
     props: {
       // isCookie,
+      contentRes,
       contentResult,
-      // userInfoRes,
+      userInfoRes,
       pages,
     },
   };

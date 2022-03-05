@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 const NavBar = (userInfo: any) => {
-  console.log(userInfo);
   return (
     <div className="header">
       <nav>

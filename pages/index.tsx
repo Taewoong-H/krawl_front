@@ -11,30 +11,10 @@ import { useState, useEffect } from 'react';
 // import UserRanking from '../components/home/ranking';
 
 const Home: NextPage = (props: any) => {
-  const [userInfo, setUserInfo] = useState({ nickname: '', profileImage: '', point: 0 });
-  const tokenString = getCookie('accessToken');
-  const fetching = async (userToken: any) => {
-    try {
-      const userInfoRes = await (
-        await fetch(`/api/accounts/navbar`, {
-          headers: { Authorization: `Token ${userToken}`, Accept: 'application/json' },
-        })
-      ).json();
-      setUserInfo(userInfoRes);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    if (tokenString && typeof tokenString === 'string') {
-      const splitTokenString = tokenString.split('"');
-      fetching(splitTokenString[3]);
-    }
-  }, []); //a가 바뀔때마다 실행
   return (
     <div className="container-lg">
       <Seo title="home"></Seo>
-      <NavBar isCookie={userInfo}></NavBar>
+      <NavBar isCookie={props.userInfoRes}></NavBar>
       <main>
         <Competition></Competition>
         <div className="row">
@@ -57,20 +37,20 @@ const Home: NextPage = (props: any) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
   let isCookie = false;
-  // let userInfoRes = {};
+  let userInfoRes = {};
 
-  // if (context.req.cookies.accessToken !== undefined) {
-  //   isCookie = true;
-  //   const tokenSplit = context.req.cookies.accessToken.split('"');
-  //   const token = tokenSplit[3];
-  //   userInfoRes = await (
-  //     await fetch(`${process.env.API_URL}/accounts/navbar`, {
-  //       headers: { Authorization: `Token ${token}`, Accept: 'application/json' },
-  //     })
-  //   ).json();
-  // }
+  if (context.req.cookies.accessToken !== undefined) {
+    isCookie = true;
+    const tokenSplit = context.req.cookies.accessToken.split('"');
+    const token = tokenSplit[3];
+    userInfoRes = await (
+      await fetch(`${process.env.API_URL}/accounts/navbar`, {
+        headers: { Authorization: `Token ${token}`, Accept: 'application/json' },
+      })
+    ).json();
+  }
 
   const contentRes = await (await fetch(`${process.env.API_URL}/contents`)).json();
   const contentResult = await Promise.all(
@@ -87,18 +67,22 @@ export const getStaticProps: GetStaticProps = async () => {
       return { ...content, ogImage, ogTitle };
     })
   );
-  const pages =
-    contentRes.count % contentRes.results.length === 0
-      ? contentRes.count / contentRes.results.length
-      : contentRes.count / contentRes.results.length + 1;
-
-  const rankRes = await (await fetch(`${process.env.API_URL}/accounts/rankings`)).json();
+  let pages = 0;
+  if (contentRes.next === null) {
+    pages = Number(context.params.id);
+  } else {
+    pages =
+      contentRes.count % contentRes.results.length === 0
+        ? contentRes.count / contentRes.results.length
+        : contentRes.count / contentRes.results.length + 1;
+  }
 
   return {
     props: {
       isCookie,
+      contentRes,
       contentResult,
-      // userInfoRes,
+      userInfoRes,
       pages,
     },
   };
