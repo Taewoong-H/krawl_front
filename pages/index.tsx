@@ -16,15 +16,17 @@ const Home: NextPage = (props: any) => {
   if (tokenString && typeof tokenString === 'string') {
     const splitTokenString = tokenString.split('"');
     const userToken = splitTokenString[3];
-    userInfo = { nickname: '', profileImage: userToken, point: 0 };
+    userInfo = { nickname: '이름', profileImage: userToken, point: 0 };
     localStorage.setItem('userToken', userToken);
   }
   return (
-    <div className="container-lg">
+    <>
       <Seo title="home"></Seo>
-      <NavBar isCookie={userInfo}></NavBar>
+      <header>
+        <NavBar userInfo={userInfo}></NavBar>
+        <Competition isContent={true}></Competition>
+      </header>
       <main>
-        <Competition></Competition>
         <div className="row">
           <div>
             <ContentList content={props.contentResult}></ContentList>
@@ -41,7 +43,7 @@ const Home: NextPage = (props: any) => {
           }
         `}
       </style>
-    </div>
+    </>
   );
 };
 

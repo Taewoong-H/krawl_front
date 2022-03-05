@@ -21,11 +21,13 @@ const HomePage: NextPage = (props: any) => {
     }
   }, []);
   return (
-    <div className="container-lg">
+    <>
       <Seo title="home"></Seo>
-      <NavBar isCookie={userInfo}></NavBar>
+      <header>
+        <NavBar userInfo={userInfo}></NavBar>
+        <Competition isContent={true}></Competition>
+      </header>
       <main>
-        <Competition></Competition>
         <div className="row">
           <div>
             <ContentList content={props.contentResult}></ContentList>
@@ -42,7 +44,7 @@ const HomePage: NextPage = (props: any) => {
           }
         `}
       </style>
-    </div>
+    </>
   );
 };
 export const getStaticPaths: GetStaticPaths = async () => {

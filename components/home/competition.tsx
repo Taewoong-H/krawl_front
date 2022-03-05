@@ -1,48 +1,24 @@
-const Competition = () => {
+import Link from 'next/link';
+
+const Competition = ({ isContent }: any) => {
   return (
-    <div className="jumbotron">
-      <div>
-        <div className="detail">
-          <p className="left">현재 끌올이 진행 중입니다.</p>
-          <p className="right"> - YYYY/MM/DD 까지</p>
-        </div>
-        <div className="progress">
-          <div className="progress-bar">
-            <span className="sr-only">60% Complete</span>
-          </div>
-        </div>
-      </div>
-      <div>
-        <button className="btn btn-warning">끌올하기</button>
-      </div>
-      <style jsx>
-        {`
-          .jumbotron {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 40px;
-          }
-          .detail {
-            display: flex;
-            align-items: center;
-          }
-          .detail .left {
-            font-size: 18px;
-          }
-          .detail .right {
-            font-size: 14px;
-            margin-left: 0.5rem;
-          }
-          .progress-bar {
-            width: 60%;
-          }
-          .btn {
-            padding: 6px 10px;
-            font-size: 15px;
-          }
-        `}
-      </style>
+    <div className="pricing-header p-3 pb-md-4 mx-auto text-center">
+      {isContent ? (
+        <h3 className="text-muted">
+          <Link href="/post">
+            <a className="btn btn-primary" role="button">
+              끌올하기
+            </a>
+          </Link>
+        </h3>
+      ) : (
+        <div></div>
+      )}
+      {isContent ? (
+        <p className="fs-5 text-muted">만 3세 미만 콘텐츠 출입금지</p>
+      ) : (
+        <p className="fs-5 text-muted">좋은 컨텐츠들은 휘발되어서 안 된다</p>
+      )}
     </div>
   );
 };

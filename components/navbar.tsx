@@ -1,29 +1,26 @@
 import Link from 'next/link';
 
-const NavBar = (userInfo: any) => {
+const NavBar = ({ userInfo }: any) => {
   return (
-    <div className="header">
-      <nav>
-        <ul className="nav nav-pills pull-right">
-          <li className="presentation">
-            <p>내 포인트 ###점</p>
-          </li>
-          <li className="presentation">
-            {userInfo.nickname ? (
-              <p>로그아웃</p>
-            ) : (
-              <Link href="/login">
-                <a>로그인</a>
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
-      <h3 className="text-muted">
-        <Link href="/#">
-          <a href="#">끌올</a>
-        </Link>
-      </h3>
+    <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <Link href="/#">
+        <a className="d-flex align-items-center text-dark text-decoration-none">
+          <span className="fs-4">끌올</span>
+        </a>
+      </Link>
+      {userInfo.nickname ? (
+        <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+          <a className="me-3 py-2 text-dark text-decoration-none">이름</a>
+          <a className="me-3 py-2 text-dark text-decoration-none">내 포인트 ###점</a>
+          <a className="py-2 text-dark text-decoration-none">로그아웃</a>
+        </nav>
+      ) : (
+        <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+          <Link href="/login">
+            <a className="py-2 text-dark text-decoration-none">로그인</a>
+          </Link>
+        </nav>
+      )}
       <style jsx>
         {`
           .header {
