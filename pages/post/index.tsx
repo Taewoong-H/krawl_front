@@ -17,8 +17,11 @@ const Post: NextPage = (props: any) => {
     if (nickname && typeof nickname === 'string' && typeof profileImage === 'string' && typeof userId === 'string') {
       setUserInfo({ nickname: nickname, profileImage: profileImage, userId: userId });
     } else {
-      alert('재로그인 하세요.');
-      router.push('/login');
+      const userToken = getCookie('accessToken');
+      if (userToken) {
+        alert('재로그인 하세요.');
+        router.push('/login');
+      }
     }
   }, []);
 

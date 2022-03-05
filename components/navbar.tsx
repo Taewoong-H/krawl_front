@@ -1,11 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { removeCookies } from 'cookies-next';
+import { useRouter } from 'next/router';
 
 const NavBar = ({ userInfo }: any) => {
+  const router = useRouter();
   const logout = () => {
     localStorage.clear();
     removeCookies('accessToken');
+    router.reload();
   };
   return (
     <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
