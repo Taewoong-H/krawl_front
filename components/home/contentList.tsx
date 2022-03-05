@@ -1,4 +1,4 @@
-const ContentList = ({content}: any) => {
+const ContentList = ({ content }: any) => {
   return (
     <>
       {content.map((item: any) => {
@@ -6,7 +6,7 @@ const ContentList = ({content}: any) => {
           <div className="card mb-3" key={item.id}>
             <div className="row g-3">
               <div className="col-md-4">
-                <img className="media-object" src={item.ogImage} alt="..." width='100' height='100' />
+                <img className="media-object" src={item.ogImage} alt="..." width="100" height="100" />
               </div>
               <div className="col-md-8">
                 <div className="card-body">

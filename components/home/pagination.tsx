@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-const Pagination = ({pages}: any) => {
-  const totalPage = []
-  for(let i = 0; i < parseInt(pages); i++) {
-    totalPage.push(i+1)
+const Pagination = ({ pages }: any) => {
+  const totalPage = [];
+  for (let i = 0; i < parseInt(pages); i++) {
+    totalPage.push(i + 1);
   }
   return (
     <nav aria-label="Page navigation example">
@@ -14,9 +14,14 @@ const Pagination = ({pages}: any) => {
           </a>
         </li>
         {totalPage.map((page: any) => {
+          const pageLink = `/${String(page)}`;
           return (
-            <li className="page-item" key={page}><Link href={String(page)}><a className="page-link">{page}</a></Link></li>
-          )
+            <li className="page-item" key={page}>
+              <Link href={pageLink}>
+                <a className="page-link">{page}</a>
+              </Link>
+            </li>
+          );
         })}
         <li className="page-item">
           <a className="page-link" href="#" aria-label="Next">

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-const NavBar = (isCookie: any) => {
+const NavBar = (userInfo: any) => {
+  console.log(userInfo);
   return (
     <div className="header">
       <nav>
@@ -9,7 +10,7 @@ const NavBar = (isCookie: any) => {
             <p>내 포인트 ###점</p>
           </li>
           <li className="presentation">
-            {isCookie.isCookie ? (
+            {userInfo.isCookie.nickname ? (
               <p>로그아웃</p>
             ) : (
               <Link href="/login">
