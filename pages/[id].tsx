@@ -95,6 +95,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       contentResult,
       pages,
     },
+    revalidate: 60,
   };
 };
 

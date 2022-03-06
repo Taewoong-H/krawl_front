@@ -103,6 +103,7 @@ export const getStaticProps: GetStaticProps = async () => {
       // userInfoRes,
       pages,
     },
+    revalidate: 60,
   };
 };
 
