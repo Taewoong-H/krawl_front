@@ -27,6 +27,21 @@ const HomePage: NextPage = (props: any) => {
     }
   }, []);
 
+  if (router.isFallback) {
+    return (
+      <>
+        <Seo title="home"></Seo>
+        <header>
+          <NavBar userInfo={userInfo}></NavBar>
+          <Competition isContent={true}></Competition>
+        </header>
+        <main>
+          <div>Loading...</div>
+        </main>
+      </>
+    );
+  }
+
   return (
     <>
       <Seo title="home"></Seo>
@@ -57,7 +72,7 @@ const HomePage: NextPage = (props: any) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
-    fallback: false, // false or 'blocking'
+    fallback: true, // false or 'blocking'
   };
 };
 
