@@ -56,7 +56,7 @@ const HomePage: NextPage = (props: any) => {
 };
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [{ params: { id: '1' } }, { params: { id: '2' } }, { params: { id: '3' } }],
+    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
     fallback: false, // false or 'blocking'
   };
 };
@@ -70,8 +70,8 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
       let ogTitle = '';
       await ogs(options, (error: boolean, results: any, response) => {
         if (!error) {
-          ogImage = results.ogImage.url;
-          ogTitle = results.ogTitle;
+          ogImage = results.ogImage.url ? results.ogImage.url : '';
+          ogTitle = results.ogTitle ? results.ogTitle : '';
         }
       });
       return { ...content, ogImage, ogTitle };

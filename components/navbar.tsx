@@ -40,7 +40,7 @@ const NavBar = ({ userInfo }: any) => {
           </Link>
         </nav>
       )}
-      <style jsx>
+      <style jsx global>
         {`
           .header {
             border-bottom: 1px solid #e5e5e5;
@@ -50,6 +50,9 @@ const NavBar = ({ userInfo }: any) => {
           }
           .logout {
             cursor: pointer;
+          }
+          .profile-image {
+            border-radius: 50px !important;
           }
         `}
       </style>
