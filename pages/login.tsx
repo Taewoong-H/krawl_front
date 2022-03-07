@@ -15,7 +15,7 @@ const Login: NextPage = () => {
         <div className="login-form">
           <div className="login-title">
             Login
-            <Link href="/#">
+            <Link href="/home">
               <h2 className="logo">끌올</h2>
             </Link>
           </div>
@@ -103,7 +103,7 @@ const Login: NextPage = () => {
               <p>Create new account</p>
             </a>
           </Link>
-          <Link href="#">
+          <Link href="/home">
             <a>
               <p>Forgot password</p>
             </a>

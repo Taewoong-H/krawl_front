@@ -12,6 +12,7 @@ const PostValidate: NextPage = (props: any) => {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState({ nickname: '', profileImage: '', userId: '' });
   const [opinion, setOpinion] = useState('');
+
   useEffect(() => {
     const nickname = localStorage.getItem('nickname');
     const profileImage = localStorage.getItem('profileImage');
