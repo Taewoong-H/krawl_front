@@ -82,14 +82,16 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
     contentRes.results.map(async (content: any) => {
       const options = { url: content.url };
       let ogImage = '';
-      let ogTitle = '';
+      let ogTitle = '끌올 제목 미상';
+      let ogDescription = '끌올 설명 미상';
       await ogs(options, (error: boolean, results: any, response) => {
         if (!error) {
           ogImage = results.ogImage.url ? results.ogImage.url : '';
-          ogTitle = results.ogTitle ? results.ogTitle : '';
+          ogTitle = results.ogTitle ? results.ogTitle : '끌올 제목 미상';
+          ogDescription = results.ogDescription ? results.ogDescription: '끌올 설명 미상';
         }
       });
-      return { ...content, ogImage, ogTitle };
+      return { ...content, ogImage, ogTitle, ogDescription };
     })
   );
 

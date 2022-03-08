@@ -15,8 +15,11 @@ const ContentList = ({ content }: any) => {
               </div>
               <div className="col-md-8 card-container">
                 <div className="card-body">
-                  <h5 className="card-title">{item.ogTitle}</h5>
-                  <p className="card-text">{item.opinion}</p>
+                  <br />
+                  <h4 className="card-title">{item.ogTitle}</h4>
+                  <br />
+                  <p className="card-text">{item.ogDescription}</p>
+                  <br />
                   <div className="card-user row ms-1">
                     <Image
                       src={item.current_user.profile_img}
@@ -25,7 +28,17 @@ const ContentList = ({ content }: any) => {
                       width={35}
                       height={35}
                     ></Image>
-                    <p className="col mb-0">{item.current_user.nickname}</p>
+                    <p className="col-auto me-auto">{item.current_user.nickname}</p>
+                    <a className="col-auto text-decoration-none" data-bs-toggle="collapse" href={`#collapse-${item.id}`} role="button" aria-expanded="false" aria-controls="collapseExample">
+                      더보기
+                    </a>
+                  </div>
+                  <div className="collapse" id={`collapse-${item.id}`}>
+                    <div className="py-3">
+                      <hr />
+                      <h5 className="card-title">작성자 의견</h5>
+                      <p className="card-text">{item.opinion}</p>
+                    </div>
                   </div>
                 </div>
                 <div className="calc-year">무려 {calcYear}년전 발행</div>
@@ -44,6 +57,18 @@ const ContentList = ({ content }: any) => {
         }
         .card-title {
           width: 80%;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space:nowrap;
+        }
+        .card-text {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          line-height: 1.5em;
+          max-height: 3em;
         }
         .calc-year {
           position: absolute;
