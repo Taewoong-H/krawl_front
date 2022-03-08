@@ -190,7 +190,12 @@ const Post: NextPage = (props: any) => {
                   onChange={(e: any) => setOpinion(e.target.value)}
                 ></textarea>
               </div>
-              {/* <select className="form-select" aria-label="Default select example">
+              {/* 
+              <div className="mb-3">
+            <label htmlFor="exampleFormControlTextarea1" className="form-label">
+              Example textarea
+            </label>
+              <select className="form-select" aria-label="Default select example">
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -241,30 +246,34 @@ const Post: NextPage = (props: any) => {
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const queryUrl = context.query.url ? context.query.url : '';
   const options = { url: queryUrl };
+
   let ogImage = '';
   let ogTitle = '';
   let ogDescription = '';
   let published = '';
   let validate = false;
-  await ogs(options, (error: boolean, results: any, response) => {
-    if (!error) {
-      ogImage = results.ogImage.url;
-      ogTitle = results.ogTitle;
-      ogDescription = results.ogDescription;
 
-      let keyValue = '';
-      const keyArray = Object.keys(results);
-      keyArray.forEach((key) => {
-        if (key.indexOf('ublish') > -1) {
-          keyValue = key;
+  if (queryUrl !== '') {
+    await ogs(options, (error: boolean, results: any, response) => {
+      if (!error) {
+        ogImage = results.ogImage.url;
+        ogTitle = results.ogTitle;
+        ogDescription = results.ogDescription;
+  
+        let keyValue = '';
+        const keyArray = Object.keys(results);
+        keyArray.forEach((key) => {
+          if (key.indexOf('ublish') > -1) {
+            keyValue = key;
+          }
+        });
+        if (keyValue !== '') {
+          published = results[keyValue].slice(0, 10);
+          validate = true;
         }
-      });
-      if (keyValue !== '') {
-        published = results[keyValue].slice(0, 10);
-        validate = true;
       }
-    }
-  });
+    });
+  }
 
   return {
     props: { queryUrl, ogImage, ogTitle, ogDescription, published, validate }, // will be passed to the page component as props
