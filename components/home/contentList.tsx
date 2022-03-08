@@ -30,7 +30,7 @@ const ContentList = ({ content }: any) => {
                     ></Image>
                     <p className="col-auto me-auto">{item.current_user.nickname}</p>
                     <a className="col-auto text-decoration-none" data-bs-toggle="collapse" href={`#collapse-${item.id}`} role="button" aria-expanded="false" aria-controls="collapseExample">
-                      더보기
+                      펼처보기
                     </a>
                   </div>
                   <div className="collapse" id={`collapse-${item.id}`}>
@@ -78,6 +78,7 @@ const ContentList = ({ content }: any) => {
           color: #2e3c7e;
           padding: 10px;
           border-radius: 5px;
+          font-size: 11px;
         }
         .profile-image {
           border-radius: 50px !important;
