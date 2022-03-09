@@ -30,6 +30,7 @@ body {
 
 body {
   background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+  color: #2e3c7e;
 }
 
 .container {

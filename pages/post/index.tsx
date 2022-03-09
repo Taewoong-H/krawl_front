@@ -75,7 +75,7 @@ const Post: NextPage = (props: any) => {
 
       if (postRes.user_id) {
         alert('포스팅 완료');
-        router.push('/');
+        router.push('/home');
       }
     } else {
       alert('로그인 하세요.');
@@ -259,7 +259,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
         ogImage = results.ogImage.url;
         ogTitle = results.ogTitle;
         ogDescription = results.ogDescription;
-  
+
         let keyValue = '';
         const keyArray = Object.keys(results);
         keyArray.forEach((key) => {

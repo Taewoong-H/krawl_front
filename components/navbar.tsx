@@ -13,13 +13,13 @@ const NavBar = ({ userInfo }: any) => {
   return (
     <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
       <Link href="/home">
-        <a className="d-flex align-items-center text-dark text-decoration-none">
+        <a className="d-flex align-items-center text-decoration-none">
           <span className="fs-4">끌올</span>
         </a>
       </Link>
       {userInfo.nickname ? (
         <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-          <a className="me-0 py-1 text-dark text-decoration-none">
+          <a className="me-0 py-1 text-decoration-none">
             <Image
               src={userInfo.profileImage}
               alt="profile-image"
@@ -28,15 +28,15 @@ const NavBar = ({ userInfo }: any) => {
               height={35}
             ></Image>
           </a>
-          <a className="me-2 py-1 text-dark text-decoration-none">{userInfo.nickname}</a>
-          <a className="py-2 text-dark text-decoration-none logout" onClick={logout}>
+          <a className="me-2 py-1 text-decoration-none navbar-text">{userInfo.nickname}</a>
+          <a className="py-2 text-decoration-none logout navbar-text" onClick={logout}>
             로그아웃
           </a>
         </nav>
       ) : (
         <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
           <Link href="/login">
-            <a className="py-2 text-dark text-decoration-none">로그인</a>
+            <a className="py-2 text-decoration-none navbar-text">로그인</a>
           </Link>
         </nav>
       )}
@@ -45,8 +45,8 @@ const NavBar = ({ userInfo }: any) => {
           .header {
             border-bottom: 1px solid #e5e5e5;
           }
-          a {
-            padding: 0 10px !important;
+          .navbar-text {
+            padding: 7px 10px !important;
           }
           .logout {
             cursor: pointer;

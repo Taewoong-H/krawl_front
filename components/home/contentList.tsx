@@ -11,7 +11,11 @@ const ContentList = ({ content }: any) => {
           <div className="card mb-3" key={item.id}>
             <div className="row g-0">
               <div className="col-md-4">
-                <img className="img-fluid rounded-start" src={item.ogImage} alt="..." />
+                {item.ogImage !== '' ? (
+                  <img className="img-fluid rounded-start" src={item.ogImage} alt="..." />
+                ) : (
+                  <img className="img-fluid rounded-start" src="/image/krawl-logo.jpg" alt="..." />
+                )}
               </div>
               <div className="col-md-8 card-container">
                 <div className="card-body">
@@ -28,9 +32,16 @@ const ContentList = ({ content }: any) => {
                       width={35}
                       height={35}
                     ></Image>
-                    <p className="col-auto me-auto">{item.current_user.nickname}</p>
-                    <a className="col-auto text-decoration-none" data-bs-toggle="collapse" href={`#collapse-${item.id}`} role="button" aria-expanded="false" aria-controls="collapseExample">
-                      펼처보기
+                    <span className="col-auto me-auto">{item.current_user.nickname}</span>
+                    <a
+                      className="col-auto text-decoration-none"
+                      data-bs-toggle="collapse"
+                      href={`#collapse-${item.id}`}
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="collapseExample"
+                    >
+                      펼쳐보기
                     </a>
                   </div>
                   <div className="collapse" id={`collapse-${item.id}`}>
@@ -57,9 +68,9 @@ const ContentList = ({ content }: any) => {
         }
         .card-title {
           width: 80%;
-          overflow:hidden;
-          text-overflow:ellipsis;
-          white-space:nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
         .card-text {
           overflow: hidden;
@@ -72,7 +83,7 @@ const ContentList = ({ content }: any) => {
         }
         .calc-year {
           position: absolute;
-          top: 5%;
+          top: 1rem;
           right: -1%;
           background-color: #fbeaeb;
           color: #2e3c7e;
@@ -82,6 +93,9 @@ const ContentList = ({ content }: any) => {
         }
         .profile-image {
           border-radius: 50px !important;
+        }
+        a {
+          color: #2e3c7e;
         }
       `}</style>
     </>
