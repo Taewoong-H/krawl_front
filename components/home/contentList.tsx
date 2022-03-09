@@ -52,7 +52,8 @@ const ContentList = ({ content }: any) => {
                     </div>
                   </div>
                 </div>
-                <div className="calc-year">무려 {calcYear}년전 발행</div>
+                {/* <div className="calc-year">무려 {calcYear}년전 발행</div> */}
+                <span className="badge bg-secondary calc-year">무려 {calcYear}년전 발행</span>
               </div>
             </div>
           </div>
@@ -84,12 +85,8 @@ const ContentList = ({ content }: any) => {
         .calc-year {
           position: absolute;
           top: 1rem;
-          right: -1%;
+          right: 0;
           background-color: #fbeaeb;
-          color: #2e3c7e;
-          padding: 10px;
-          border-radius: 5px;
-          font-size: 11px;
         }
         .profile-image {
           border-radius: 50px !important;
