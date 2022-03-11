@@ -39,9 +39,7 @@ const Register: NextPage = () => {
           onSubmit={async (values) => {
             values.username = values.email;
             try {
-              const response = await axios.post('/api/register', {
-                values,
-              });
+              const response = await axios.post('/api/register', values);
               console.log(response);
             } catch (error) {
               console.error(error);
