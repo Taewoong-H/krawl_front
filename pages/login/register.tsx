@@ -4,6 +4,7 @@ import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
 import { InputField } from '../../components/login/inputField';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 interface Values {
   email: string;
@@ -12,6 +13,7 @@ interface Values {
 }
 
 const Register: NextPage = () => {
+  const router = useRouter();
   return (
     <div className="register-container">
       <div className="register-wrapper">
@@ -40,8 +42,15 @@ const Register: NextPage = () => {
             values.username = values.email;
             try {
               const response = await axios.post('/api/register', values);
+              if (response.data.rescode === 1) {
+                alert('회원가입이 완료되었습니다.')
+                router.push('/login');
+              } else {
+                alert('회원가입에 실패했습니다.')
+              }
               console.log(response);
             } catch (error) {
+              alert('회원가입에 실패했습니다.')
               console.error(error);
             }
           }}
