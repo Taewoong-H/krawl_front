@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
-import { InputField } from '../components/login/inputField';
+import Link from 'next/link';
+import { InputField } from '../../components/login/inputField';
 import axios from 'axios';
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { setToken } from './api/tokenManger';
+import { setToken } from '../api/tokenManger';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -48,6 +48,7 @@ const Login: NextPage = () => {
                   alert('이메일 또는 비밀번호를 확인해주세요.');
                 }
               } catch (error) {
+                alert('이메일 또는 비밀번호를 확인해주세요.');
                 console.error(error);
               }
             }}
@@ -98,7 +99,7 @@ const Login: NextPage = () => {
           </Formik>
         </div>
         <div className="link-container">
-          <Link href="/register">
+          <Link href="/login/register">
             <a>
               <p>Create new account</p>
             </a>

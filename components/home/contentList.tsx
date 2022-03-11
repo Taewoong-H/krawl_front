@@ -64,6 +64,9 @@ const ContentList = ({ content }: any) => {
           width: 100%;
           height: 15rem;
         }
+        .card:hover {
+          box-shadow: 1px 1px 20px #ddd;
+        }
         .card-container {
           position: relative;
         }
