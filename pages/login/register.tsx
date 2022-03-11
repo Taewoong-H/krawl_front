@@ -117,7 +117,6 @@ const Register: NextPage = () => {
           width: 550px;
           min-height: 550px;
           background-color: #fff;
-          color: rgb(255, 255, 255);
           transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
           border-radius: 16px;
           box-shadow: rgb(0 0 0 / 70%) 0px 0px 1px 0px,

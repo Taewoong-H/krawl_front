@@ -81,7 +81,7 @@ const Login: NextPage = () => {
                   className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
                   component={InputField}
                 />
-                <ErrorMessage name="email" component="div" className="invalid-feedback" />
+                <ErrorMessage name="email" component="div" className="invalid-feedback">{msg => <div className='error-message'>{msg}</div>}</ErrorMessage>
                 <Field
                   id="password"
                   name="password"
@@ -90,7 +90,7 @@ const Login: NextPage = () => {
                   type="password"
                   component={InputField}
                 />
-                <ErrorMessage name="password" component="div" className="invalid-feedback" />
+                <ErrorMessage name="password" component="div" className="invalid-feedback">{msg => <div className='error-message'>{msg}</div>}</ErrorMessage>
                 <button className="login-button" type="submit">
                   LOGIN
                 </button>
@@ -126,7 +126,6 @@ const Login: NextPage = () => {
             width: 550px;
             height: 550px;
             background-color: #fff;
-            color: rgb(255, 255, 255);
             transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
             border-radius: 16px;
             box-shadow: rgb(0 0 0 / 70%) 0px 0px 1px 0px, rgb(0 0 0 / 50%) 0px 3px 4px -2px;
@@ -152,7 +151,7 @@ const Login: NextPage = () => {
           .login-button {
             font-family: Roboto;
             font-size: 16px;
-            margin-bottom: 20px;
+            margin: 20px 0;
             color: #fff;
             cursor: pointer;
             text-transform: uppercase;
@@ -175,6 +174,13 @@ const Login: NextPage = () => {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
+          }
+          .error-message {
+            width: 100%;
+            padding-left: 7px;
+            margin-top: 0.25rem;
+            font-size: .875em;
+            color: #dc3545;
           }
         `}
       </style>

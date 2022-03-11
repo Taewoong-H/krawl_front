@@ -35,7 +35,7 @@ export const InputField = ({ field, form: _, ...props }: FieldProps & InputProps
           .input-container {
             display: flex;
             flex-direction: column;
-            margin-bottom: 23px;
+            margin: 18px 0;
           }
           .label {
             font-family: Roboto;
