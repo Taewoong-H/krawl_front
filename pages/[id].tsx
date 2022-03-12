@@ -16,14 +16,17 @@ const HomePage: NextPage = (props: any) => {
     const nickname = localStorage.getItem('nickname');
     const profileImage = localStorage.getItem('profileImage');
     const userId = localStorage.getItem('userId');
-    if (nickname && typeof nickname === 'string' && typeof profileImage === 'string' && typeof userId === 'string') {
-      setUserInfo({ nickname: nickname, profileImage: profileImage, userId: userId });
-    } else {
-      const userToken = getCookie('accessToken');
-      if (userToken) {
+    const userToken = getCookie('accessToken');
+    if (userToken) {
+      if (nickname && typeof nickname === 'string' && typeof profileImage === 'string' && typeof userId === 'string') {
+        setUserInfo({ nickname: nickname, profileImage: profileImage, userId: userId });
+      } else {
         alert('재로그인 하세요.');
         router.push('/login');
       }
+    } else {
+      alert('재로그인 하세요.');
+      router.push('/login');
     }
   }, []);
 
@@ -52,7 +55,7 @@ const HomePage: NextPage = (props: any) => {
       <main>
         <div className="row">
           <div>
-            <ContentList content={props.contentResult}></ContentList>
+            <ContentList content={props.contentsResult}></ContentList>
           </div>
         </div>
       </main>
@@ -69,6 +72,7 @@ const HomePage: NextPage = (props: any) => {
     </>
   );
 };
+
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
@@ -76,10 +80,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
-  const contentRes = await (await fetch(`${process.env.API_URL}/contents?page=${context.params.id}`)).json();
-  const contentResult = await Promise.all(
-    contentRes.results.map(async (content: any) => {
+export const getStaticProps: GetStaticProps = async ({ params }: any) => {
+  const contentsRes = await (await fetch(`${process.env.API_URL}/contents?page=${params.id}`)).json();
+  const contentsResult = await Promise.all(
+    contentsRes.results.map(async (content: any) => {
       const options = { url: content.url };
       let ogImage = '';
       let ogTitle = '끌올 제목 미상';
@@ -88,7 +92,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         if (!error) {
           ogImage = results.ogImage.url ? results.ogImage.url : '';
           ogTitle = results.ogTitle ? results.ogTitle : '끌올 제목 미상';
-          ogDescription = results.ogDescription ? results.ogDescription: '끌올 설명 미상';
+          ogDescription = results.ogDescription ? results.ogDescription : '끌올 설명 미상';
         }
       });
       return { ...content, ogImage, ogTitle, ogDescription };
@@ -96,20 +100,20 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
   );
 
   let pages = 0;
-  if (contentRes.next === null) {
-    pages = Number(context.params.id);
+  if (contentsRes.next === null) {
+    pages = Number(params.id);
   } else {
     pages =
-      contentRes.count % contentRes.results.length === 0
-        ? contentRes.count / contentRes.results.length
-        : contentRes.count / contentRes.results.length + 1;
+      contentsRes.count % contentsRes.results.length === 0
+        ? contentsRes.count / contentsRes.results.length
+        : contentsRes.count / contentsRes.results.length + 1;
   }
 
   return {
     props: {
       // isCookie,
-      contentRes,
-      contentResult,
+      contentsRes,
+      contentsResult,
       pages,
     },
     revalidate: 60,

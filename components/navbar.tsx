@@ -46,7 +46,7 @@ const NavBar = ({ userInfo }: any) => {
             border-bottom: 1px solid #e5e5e5;
           }
           .navbar-text {
-            padding: 7px 10px !important;
+            padding: 10px 10px !important;
           }
           .logout {
             cursor: pointer;
