@@ -18,14 +18,15 @@ const Post: NextPage = (props: any) => {
     const nickname = localStorage.getItem('nickname');
     const profileImage = localStorage.getItem('profileImage');
     const userId = localStorage.getItem('userId');
-    if (nickname && typeof nickname === 'string' && typeof profileImage === 'string' && typeof userId === 'string') {
-      setUserInfo({ nickname: nickname, profileImage: profileImage, userId: userId });
-    } else {
-      const userToken = getCookie('accessToken');
-      if (userToken) {
+    const userToken = getCookie('accessToken');
+    if (userToken) {
+      if (nickname && typeof nickname === 'string' && typeof profileImage === 'string' && typeof userId === 'string') {
+        setUserInfo({ nickname: nickname, profileImage: profileImage, userId: userId });
+      } else {
         alert('재로그인 하세요.');
         router.push('/login');
       }
+    } else {
     }
   }, []);
 

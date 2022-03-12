@@ -25,8 +25,6 @@ const HomePage: NextPage = (props: any) => {
         router.push('/login');
       }
     } else {
-      alert('재로그인 하세요.');
-      router.push('/login');
     }
   }, []);
 
