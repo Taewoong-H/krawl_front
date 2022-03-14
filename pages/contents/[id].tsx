@@ -7,6 +7,7 @@ import Seo from '../../components/seo';
 import NavBar from '../../components/navbar';
 import ContentItem from '../../components/content/contentItem';
 import Comments from '../../components/content/comments';
+import Like from '../../components/content/like';
 import ogs from 'open-graph-scraper';
 
 const ContentsPage: NextPage = (props: any) => {
@@ -102,13 +103,12 @@ const ContentsPage: NextPage = (props: any) => {
           {props.contentResult.opinion.split('\n').map((line: any, index: number) => {
             return <p key={index}>{line}</p>;
           })}
-          <br />
-          <ul className="nav col-md-4 list-unstyled d-flex">
-            <li className="me-3">
-              <Image src="/image/heart.svg" width={20} height={20}></Image>
+          <ul className="nav col-md-4 list-unstyled d-flex align-items-center">
+            <li>
+              <Like></Like>
             </li>
-            <li className="me-3">
-              <Image src="/image/share.svg" width={20} height={20}></Image>
+            <li className="me-3 my-auto">
+              <Image src="/image/share.svg" width={29.25} height={28.33}></Image>
             </li>
           </ul>
 
@@ -132,6 +132,13 @@ const ContentsPage: NextPage = (props: any) => {
           <Comments comments={props.contentResult.comments}></Comments>
         </div>
       </main>
+      <style jsx>
+        {`
+          .nn {
+            width: 60px;
+          }
+        `}
+      </style>
     </>
   );
 };

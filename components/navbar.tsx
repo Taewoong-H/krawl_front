@@ -37,7 +37,7 @@ const NavBar = ({ userInfo }: any) => {
       ) : (
         <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
           <Link href="/login">
-            <a className="py-2 text-decoration-none navbar-text">로그인</a>
+            <a className="py-2 text-decoration-none navbar-text text-black">로그인</a>
           </Link>
         </nav>
       )}
