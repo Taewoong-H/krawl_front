@@ -1,4 +1,4 @@
-import type { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import type { NextPage, GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -136,18 +136,8 @@ const ContentsPage: NextPage = (props: any) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const popularContents = await (await fetch(`${process.env.API_URL}/contents/get-popular-posts`)).json();
-
-  const paths = popularContents.map((content: any) => ({
-    params: { id: content.id.toString() },
-  }));
-
-  return { paths, fallback: true };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  const contentRes = await (await fetch(`${process.env.API_URL}/contents/get-post/${params.id}`)).json();
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
+  const contentRes = await (await fetch(`${process.env.API_URL}/contents/get-post/${context.params.id}`)).json();
 
   const options = { url: contentRes.url };
   let ogImage = '';
@@ -162,19 +152,8 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   });
   const contentResult = { ...contentRes, ogImage, ogTitle, ogDescription };
 
-  // let pages = 0;
-  // if (contentRes.next === null) {
-  //   pages = Number(context.params.id);
-  // } else {
-  //   pages =
-  //     contentRes.count % contentRes.results.length === 0
-  //       ? contentRes.count / contentRes.results.length
-  //       : contentRes.count / contentRes.results.length + 1;
-  // }
-
   return {
     props: { contentResult },
-    revalidate: 60,
   };
 };
 
