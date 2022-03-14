@@ -3,10 +3,12 @@ import type { AppProps } from 'next/app';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
+import NextNProgress from 'nextjs-progressbar';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div className="container py-3">
+      <NextNProgress />
       <Component {...pageProps} />
       <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div className="col-md-4 d-flex align-items-center">
