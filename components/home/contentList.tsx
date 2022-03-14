@@ -16,7 +16,7 @@ const ContentList = ({ content }: any) => {
                   {item.ogImage !== '' ? (
                     <img className="img-fluid rounded-start" src={item.ogImage} alt="..." />
                   ) : (
-                    <img className="img-fluid rounded-start" src="/image/krawl-logo.jpg" alt="..." />
+                    <img className="img-fluid rounded-start" src="/image/krawl-logo.png" alt="..." />
                   )}
                 </div>
                 <div className="col-md-8 card-container">
@@ -94,13 +94,9 @@ const ContentList = ({ content }: any) => {
           position: absolute;
           top: 1rem;
           right: 10px;
-          background-color: #fbeaeb;
         }
         .profile-image {
           border-radius: 50px !important;
-        }
-        a {
-          color: #2e3c7e;
         }
       `}</style>
     </>

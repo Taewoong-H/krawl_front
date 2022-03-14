@@ -14,7 +14,7 @@ const ContentItem = ({ item }: any) => {
               {item.ogImage !== '' ? (
                 <img className="img-fluid rounded-start" src={item.ogImage} alt="..." />
               ) : (
-                <img className="img-fluid rounded-start" src="/image/krawl-logo.jpg" alt="..." />
+                <img className="img-fluid rounded-start" src="/image/krawl-logo.png" alt="..." />
               )}
             </div>
             <div className="col-md-8 card-container">
@@ -59,11 +59,7 @@ const ContentItem = ({ item }: any) => {
         .calc-year {
           position: absolute;
           top: 1rem;
-          right: 0;
-          background-color: #fbeaeb;
-        }
-        a {
-          color: #2e3c7e;
+          right: 10px;
         }
       `}</style>
     </>

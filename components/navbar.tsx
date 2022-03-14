@@ -13,8 +13,9 @@ const NavBar = ({ userInfo }: any) => {
   return (
     <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
       <Link href="/home">
-        <a className="d-flex align-items-center text-decoration-none">
-          <span className="fs-4">끌올</span>
+        <a className="d-flex align-items-center text-decoration-none fs-4 text-black bold">
+          <Image src="/image/krawl-logo.png" alt="logo-image" className="col" width={40} height={40}></Image>
+          끌올
         </a>
       </Link>
       {userInfo.nickname ? (
@@ -28,8 +29,8 @@ const NavBar = ({ userInfo }: any) => {
               height={35}
             ></Image>
           </a>
-          <a className="mx-2 py-1 my-auto text-decoration-none navbar-text">{userInfo.nickname}</a>
-          <a className="py-2 my-auto text-decoration-none logout navbar-text" onClick={logout}>
+          <span className="mx-2 py-1 my-auto text-decoration-none navbar-text">{userInfo.nickname}</span>
+          <a className="py-2 my-auto text-decoration-none logout navbar-text text-black" onClick={logout}>
             로그아웃
           </a>
         </nav>

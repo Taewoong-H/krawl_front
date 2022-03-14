@@ -6,7 +6,7 @@ const Competition = ({ isContent }: any) => {
       {isContent ? (
         <h3 className="text-muted">
           <Link href="/post">
-            <a className="btn btn-primary btn-lg" role="button">
+            <a className="btn btn-secondary btn-lg" role="button">
               끌올하기
             </a>
           </Link>
@@ -19,13 +19,7 @@ const Competition = ({ isContent }: any) => {
       ) : (
         <p className="fs-5 text-muted">좋은 콘텐츠들은 휘발되어서 안 된다</p>
       )}
-      <style jsx>{`
-        .btn {
-          background-color: #fbeaeb;
-          border-color: #fbeaeb;
-          color: #2e3c7e;
-        }
-      `}</style>
+      <style jsx>{``}</style>
     </div>
   );
 };

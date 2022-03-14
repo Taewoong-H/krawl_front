@@ -39,7 +39,6 @@ const Login: NextPage = () => {
                 const userId = response.data.user_id;
                 if (token) {
                   setToken(token, token);
-                  alert('로그인 성공');
                   localStorage.setItem('nickname', nickName);
                   localStorage.setItem('profileImage', profileImage);
                   localStorage.setItem('userId', userId);
@@ -81,7 +80,9 @@ const Login: NextPage = () => {
                   className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
                   component={InputField}
                 />
-                <ErrorMessage name="email" component="div" className="invalid-feedback">{msg => <div className='error-message'>{msg}</div>}</ErrorMessage>
+                <ErrorMessage name="email" component="div" className="invalid-feedback">
+                  {(msg) => <div className="error-message">{msg}</div>}
+                </ErrorMessage>
                 <Field
                   id="password"
                   name="password"
@@ -90,7 +91,9 @@ const Login: NextPage = () => {
                   type="password"
                   component={InputField}
                 />
-                <ErrorMessage name="password" component="div" className="invalid-feedback">{msg => <div className='error-message'>{msg}</div>}</ErrorMessage>
+                <ErrorMessage name="password" component="div" className="invalid-feedback">
+                  {(msg) => <div className="error-message">{msg}</div>}
+                </ErrorMessage>
                 <button className="login-button" type="submit">
                   LOGIN
                 </button>
@@ -179,7 +182,7 @@ const Login: NextPage = () => {
             width: 100%;
             padding-left: 7px;
             margin-top: 0.25rem;
-            font-size: .875em;
+            font-size: 0.875em;
             color: #dc3545;
           }
         `}

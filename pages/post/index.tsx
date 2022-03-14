@@ -75,7 +75,6 @@ const Post: NextPage = (props: any) => {
       ).json();
 
       if (postRes.user_id) {
-        alert('포스팅 완료');
         router.push('/home');
       }
     } else {
