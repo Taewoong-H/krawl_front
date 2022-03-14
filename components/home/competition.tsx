@@ -17,7 +17,7 @@ const Competition = ({ isContent }: any) => {
       {isContent ? (
         <p className="fs-5 text-muted">만 3세 미만 콘텐츠 출입금지</p>
       ) : (
-        <p className="fs-5 text-muted">좋은 컨텐츠들은 휘발되어서 안 된다</p>
+        <p className="fs-5 text-muted">좋은 콘텐츠들은 휘발되어서 안 된다</p>
       )}
       <style jsx>{`
         .btn {

@@ -120,7 +120,7 @@ const Post: NextPage = (props: any) => {
                 </a>
                 <div className="dropdown-menu px-2" aria-labelledby="dropdownMenuButton1">
                   <p className="ml-1">
-                    3년 이전 컨텐츠만 등록 가능합니다.<br></br> 자동으로 날짜 검증이 되지 않는 컨텐츠는 운영자가 직접
+                    3년 이전 콘텐츠만 등록 가능합니다.<br></br> 자동으로 날짜 검증이 되지 않는 콘텐츠는 운영자가 직접
                     보고 판단해서 올라갈 예정입니다.<br></br> 글이 올라가는 시간이 걸릴 수 있습니다.
                   </p>
                 </div>

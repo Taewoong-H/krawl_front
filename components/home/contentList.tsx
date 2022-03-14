@@ -45,11 +45,12 @@ const ContentList = ({ content }: any) => {
                       <Image
                         src={item.current_user.profile_img}
                         alt="profile-image"
-                        className="profile-image col"
+                        className="profile-image col-1"
                         width={35}
                         height={35}
                       ></Image>
                       <span className="col-auto me-auto my-auto">{item.current_user.nickname}</span>
+                      <span className="col-auto my-auto small text-black-50">좋아요 {item.likers.length}개</span>
                     </div>
                   </div>
                   {/* <div className="calc-year">무려 {calcYear}년전 발행</div> */}
@@ -61,15 +62,18 @@ const ContentList = ({ content }: any) => {
         );
       })}
       <style jsx global>{`
-        .img-fluid {
-          width: 100%;
-          height: 15rem;
+        .card {
+          cursor: pointer;
         }
         .card:hover {
           box-shadow: 1px 1px 20px #ddd;
         }
         .card-container {
           position: relative;
+        }
+        .img-fluid {
+          width: 100%;
+          height: 15rem;
         }
         .card-title {
           width: 80%;
@@ -89,7 +93,7 @@ const ContentList = ({ content }: any) => {
         .calc-year {
           position: absolute;
           top: 1rem;
-          right: 0;
+          right: 10px;
           background-color: #fbeaeb;
         }
         .profile-image {
