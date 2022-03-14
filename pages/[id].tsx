@@ -114,7 +114,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
       contentsResult,
       pages,
     },
-    revalidate: 60,
+    revalidate: 30,
   };
 };
 

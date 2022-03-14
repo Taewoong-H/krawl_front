@@ -19,7 +19,7 @@ const NavBar = ({ userInfo }: any) => {
       </Link>
       {userInfo.nickname ? (
         <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-          <a className="me-0 py-1 text-decoration-none">
+          <a className="me-0 py-1 my-auto text-decoration-none">
             <Image
               src={userInfo.profileImage}
               alt="profile-image"
@@ -28,8 +28,8 @@ const NavBar = ({ userInfo }: any) => {
               height={35}
             ></Image>
           </a>
-          <a className="me-2 py-1 text-decoration-none navbar-text">{userInfo.nickname}</a>
-          <a className="py-2 text-decoration-none logout navbar-text" onClick={logout}>
+          <a className="mx-2 py-1 my-auto text-decoration-none navbar-text">{userInfo.nickname}</a>
+          <a className="py-2 my-auto text-decoration-none logout navbar-text" onClick={logout}>
             로그아웃
           </a>
         </nav>
@@ -44,9 +44,6 @@ const NavBar = ({ userInfo }: any) => {
         {`
           .header {
             border-bottom: 1px solid #e5e5e5;
-          }
-          .navbar-text {
-            padding: 10px 10px !important;
           }
           .logout {
             cursor: pointer;

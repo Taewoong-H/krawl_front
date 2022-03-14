@@ -25,7 +25,20 @@ const ContentList = ({ content }: any) => {
                     <h4 className="card-title">{item.ogTitle}</h4>
                     <br />
                     <p className="card-text">
-                      {item.opinion && item.opinion !== '' ? item.opinion : item.ogDescription}
+                      {item.opinion && item.opinion !== '' ? (
+                        <>
+                          {item.opinion.split('\n').map((line: any, index: number) => {
+                            return (
+                              <span key={index}>
+                                {line}
+                                <br />
+                              </span>
+                            );
+                          })}
+                        </>
+                      ) : (
+                        item.ogDescription
+                      )}
                     </p>
                     <br />
                     <div className="card-user row ms-1">
@@ -36,7 +49,7 @@ const ContentList = ({ content }: any) => {
                         width={35}
                         height={35}
                       ></Image>
-                      <span className="col-auto me-auto">{item.current_user.nickname}</span>
+                      <span className="col-auto me-auto my-auto">{item.current_user.nickname}</span>
                     </div>
                   </div>
                   {/* <div className="calc-year">무려 {calcYear}년전 발행</div> */}

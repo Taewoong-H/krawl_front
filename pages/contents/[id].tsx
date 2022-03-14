@@ -12,6 +12,7 @@ import ogs from 'open-graph-scraper';
 const ContentsPage: NextPage = (props: any) => {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState({ nickname: '', profileImage: '', userId: '' });
+  const [comment, setComment] = useState('');
   useEffect(() => {
     const nickname = localStorage.getItem('nickname');
     const profileImage = localStorage.getItem('profileImage');
@@ -27,6 +28,41 @@ const ContentsPage: NextPage = (props: any) => {
     } else {
     }
   }, []);
+
+  const submitComment = async () => {
+    console.log(props);
+    const today = new Date().toLocaleDateString();
+    const userToken = getCookie('accessToken');
+    const body = {
+      user_id: userInfo.userId,
+      content_id: props.contentResult.id,
+      body: comment,
+      del_yn: false,
+      created_at: '2022-03-14',
+    };
+
+    if (userToken && typeof userToken === 'string') {
+      const tokenSplit = userToken.split('"');
+      const token = tokenSplit[3];
+      const postRes = await (
+        await fetch('/api/contents/post-comment/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`,
+          },
+          body: JSON.stringify(body),
+        })
+      ).json();
+
+      if (postRes.user_id) {
+        router.reload();
+      }
+    } else {
+      alert('로그인 하세요.');
+      router.push('/login');
+    }
+  };
 
   if (router.isFallback) {
     return (
@@ -58,12 +94,14 @@ const ContentsPage: NextPage = (props: any) => {
               width={30}
               height={30}
             ></Image>
-            <span className="col-auto me-auto profile-nickname">{props.contentResult.nickname}</span>
+            <span className="col-auto me-auto my-auto profile-nickname">{props.contentResult.nickname}</span>
           </div>
           <br />
           <ContentItem item={props.contentResult}></ContentItem>
           <br />
-          <p>{props.contentResult.opinion}</p>
+          {props.contentResult.opinion.split('\n').map((line: any, index: number) => {
+            return <p key={index}>{line}</p>;
+          })}
           <br />
           <ul className="nav col-md-4 list-unstyled d-flex">
             <li className="me-3">
@@ -76,8 +114,22 @@ const ContentsPage: NextPage = (props: any) => {
 
           <hr />
           <h3>댓글</h3>
+          <div className="mb-3 row justify-content-center">
+            <div className="col-10 col-md-11 center">
+              <textarea
+                className="form-control"
+                id="commentTextarea"
+                rows={2}
+                onChange={(e: any) => setComment(e.target.value)}
+              ></textarea>
+            </div>
+            <div className="col-2  col-md-1 left my-auto">
+              <button className="btn btn-primary" type="button" onClick={submitComment}>
+                submit{' '}
+              </button>
+            </div>
+          </div>
           <Comments comments={props.contentResult.comments}></Comments>
-          {/* <p>{props.contentResult.comments}</p> */}
         </div>
       </main>
     </>
