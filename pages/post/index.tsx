@@ -13,6 +13,10 @@ const Post: NextPage = (props: any) => {
   const [userInfo, setUserInfo] = useState({ nickname: '', profileImage: '', userId: '' });
   const [url, setUrl] = useState('');
   const [opinion, setOpinion] = useState('');
+  const [isDiabled, setIsDiabled] = useState(false);
+
+  const today = new Date();
+  const year = today.getFullYear();
 
   useEffect(() => {
     const nickname = localStorage.getItem('nickname');
@@ -61,6 +65,7 @@ const Post: NextPage = (props: any) => {
 
     const userToken = getCookie('accessToken');
     if (userToken && typeof userToken === 'string') {
+      setIsDiabled(true);
       const tokenSplit = userToken.split('"');
       const token = tokenSplit[3];
       const postRes = await (
@@ -99,13 +104,20 @@ const Post: NextPage = (props: any) => {
               placeholder="공유하고자 하는 url"
               onChange={inputValue}
               value={url}
+              disabled={props.queryUrl !== ''}
             />
-            <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={urlCheck}>
+            <button
+              className="btn btn-outline-secondary"
+              type="button"
+              id="button-addon2"
+              onClick={urlCheck}
+              disabled={props.queryUrl !== ''}
+            >
               추가
             </button>
           </div>
           <div className="row row-cols-auto">
-            <span className="col">끌올 가능한 콘텐츠 : YYYY년 MM월 DD일 이전 발행 </span>
+            <span className="col">끌올 가능한 콘텐츠 : {year - 3}년 이전 발행 </span>
             {!props.queryUrl ? (
               <>
                 <a
@@ -224,7 +236,7 @@ const Post: NextPage = (props: any) => {
             <option value="3">Three</option>
           </select> */}
               <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button className="btn btn-primary mt-3" type="button" onClick={postContent}>
+                <button className="btn btn-primary mt-3" type="button" onClick={postContent} disabled={isDiabled}>
                   저장하기
                 </button>
               </div>
@@ -269,6 +281,8 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const queryUrl = context.query.url ? context.query.url : '';
   const options = { url: queryUrl };
 
+  const today = new Date();
+
   let ogImage = '';
   let ogTitle = '';
   let ogDescription = '';
@@ -291,7 +305,11 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
         });
         if (keyValue !== '') {
           published = results[keyValue].slice(0, 10);
-          validate = true;
+          const itemDate = new Date(published);
+          const calcYear = today.getFullYear() - itemDate.getFullYear();
+          if (calcYear >= 3) {
+            validate = true;
+          }
         }
       }
     });

@@ -132,13 +132,7 @@ const ContentsPage: NextPage = (props: any) => {
           <Comments comments={props.contentResult.comments}></Comments>
         </div>
       </main>
-      <style jsx>
-        {`
-          .nn {
-            width: 60px;
-          }
-        `}
-      </style>
+      <style jsx>{``}</style>
     </>
   );
 };

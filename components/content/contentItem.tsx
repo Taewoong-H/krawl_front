@@ -31,15 +31,18 @@ const ContentItem = ({ item }: any) => {
         </Link>
       </div>
       <style jsx global>{`
-        .img-fluid {
-          width: 100%;
-          height: 15rem;
+        .card {
+          cursor: pointer;
         }
         .card:hover {
           box-shadow: 1px 1px 20px #ddd;
         }
         .card-container {
           position: relative;
+        }
+        .img-fluid {
+          width: 100%;
+          height: 15rem;
         }
         .card-title {
           width: 80%;
