@@ -14,8 +14,7 @@ const NavBar = ({ userInfo }: any) => {
     <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
       <Link href="/home">
         <a className="d-flex align-items-center text-decoration-none fs-4 text-black bold">
-          <Image src="/image/krawl-logo.png" alt="logo-image" className="col" width={40} height={40}></Image>
-          끌올
+          <Image src="/image/krawl-logo-new.png" alt="logo-image" className="col" width={50} height={50}></Image>
         </a>
       </Link>
       {userInfo.nickname ? (

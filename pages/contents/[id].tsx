@@ -14,14 +14,21 @@ const ContentsPage: NextPage = (props: any) => {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState({ nickname: '', profileImage: '', userId: '' });
   const [comment, setComment] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+  const userToken = getCookie('accessToken');
+
   useEffect(() => {
     const nickname = localStorage.getItem('nickname');
     const profileImage = localStorage.getItem('profileImage');
     const userId = localStorage.getItem('userId');
-    const userToken = getCookie('accessToken');
+    // const userToken = getCookie('accessToken');
     if (userToken) {
       if (nickname && typeof nickname === 'string' && typeof profileImage === 'string' && typeof userId === 'string') {
         setUserInfo({ nickname: nickname, profileImage: profileImage, userId: userId });
+        const isLiked = props.contentResult.likers.find((id: any) => String(id) === String(userId));
+        const defaultLike = isLiked !== undefined ? true : false;
+        setIsChecked(defaultLike);
+        console.log(isChecked);
       } else {
         alert('재로그인 하세요.');
         router.push('/login');
@@ -32,14 +39,16 @@ const ContentsPage: NextPage = (props: any) => {
 
   const submitComment = async () => {
     console.log(props);
-    const today = new Date().toLocaleDateString();
-    const userToken = getCookie('accessToken');
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const date = today.getDate();
     const body = {
       user_id: userInfo.userId,
       content_id: props.contentResult.id,
       body: comment,
       del_yn: false,
-      created_at: '2022-03-14',
+      created_at: `${year}-${month}-${date}`,
     };
 
     if (userToken && typeof userToken === 'string') {
@@ -63,6 +72,10 @@ const ContentsPage: NextPage = (props: any) => {
       alert('로그인 하세요.');
       router.push('/login');
     }
+  };
+
+  const setLikeButton = (e: boolean) => {
+    setIsChecked(e);
   };
 
   if (router.isFallback) {
@@ -103,14 +116,7 @@ const ContentsPage: NextPage = (props: any) => {
           {props.contentResult.opinion.split('\n').map((line: any, index: number) => {
             return <p key={index}>{line}</p>;
           })}
-          <ul className="nav col-md-4 list-unstyled d-flex align-items-center">
-            <li>
-              <Like></Like>
-            </li>
-            <li className="me-3 my-auto">
-              <Image src="/image/share.svg" width={29.25} height={28.33}></Image>
-            </li>
-          </ul>
+          <Like propBody={{ userInfo, props, userToken, isChecked, setLikeButton }}></Like>
 
           <hr />
           <h3>댓글</h3>

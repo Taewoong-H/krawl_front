@@ -16,7 +16,7 @@ const ContentList = ({ content }: any) => {
                   {item.ogImage !== '' ? (
                     <img className="img-fluid rounded-start" src={item.ogImage} alt="..." />
                   ) : (
-                    <img className="img-fluid rounded-start" src="/image/krawl-logo.png" alt="..." />
+                    <img className="img-fluid rounded-start" src="/image/krawl-logo-new.png" alt="..." />
                   )}
                 </div>
                 <div className="col-md-8 card-container">

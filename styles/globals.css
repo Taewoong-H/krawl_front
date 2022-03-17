@@ -52,3 +52,24 @@ body {
 .pricing-header {
   max-width: 700px;
 }
+
+.btn-primary {
+  background-color: #16a637 !important;
+  border: #16a637 solid 1px;
+  color: white !important;
+}
+.btn-secondary {
+  border: #16a637 solid 2px;
+  background-color: transparent !important;
+  color: #16a637 !important;
+  font-weight: 600 !important;
+}
+
+.bg-primary {
+  color: white !important;
+  background-color: black !important;
+}
+.bg-secondary {
+  color: white !important;
+  background-color: black !important;
+}
