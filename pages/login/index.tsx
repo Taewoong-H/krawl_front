@@ -103,12 +103,12 @@ const Login: NextPage = () => {
         </div>
         <div className="link-container">
           <Link href="/login/register">
-            <a>
+            <a className="text-decoration-none text-black">
               <p>Create new account</p>
             </a>
           </Link>
           <Link href="/home">
-            <a>
+            <a className="text-decoration-none text-black">
               <p>Forgot password</p>
             </a>
           </Link>
@@ -167,10 +167,10 @@ const Login: NextPage = () => {
             height: 50px;
             outline: none !important;
             border: none;
-            background-image: linear-gradient(to top, #5227ff, #7409fc);
+            background-image: linear-gradient(to top, #16a637, #e8f5e9);
           }
           .login-button:hover {
-            background-image: linear-gradient(to top, #7409fc, #5227ff);
+            background-image: linear-gradient(to top, #e8f5e9, #16a637);
             opacity: 0.8;
           }
           .link-container {

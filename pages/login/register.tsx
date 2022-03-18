@@ -31,26 +31,22 @@ const Register: NextPage = () => {
           }}
           validationSchema={Yup.object().shape({
             // name: Yup.string().required(' Name is required'),
-            email: Yup.string()
-              .email('Email is invalid')
-              .required('Email is required'),
-            password: Yup.string()
-              .min(6, 'Password must be at least 6 characters')
-              .required('Password is required'),
+            email: Yup.string().email('Email is invalid').required('Email is required'),
+            password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
           })}
           onSubmit={async (values) => {
             values.username = values.email;
             try {
               const response = await axios.post('/api/register', values);
               if (response.data.rescode === 1) {
-                alert('회원가입이 완료되었습니다.')
+                alert('회원가입이 완료되었습니다.');
                 router.push('/login');
               } else {
-                alert('회원가입에 실패했습니다.')
+                alert('회원가입에 실패했습니다.');
               }
               console.log(response);
             } catch (error) {
-              alert('회원가입에 실패했습니다.')
+              alert('회원가입에 실패했습니다.');
               console.error(error);
             }
           }}
@@ -58,22 +54,15 @@ const Register: NextPage = () => {
           {({ errors, status, touched }) => (
             <Form>
               <Field
-                id='email'
-                name='email'
-                type='email'
-                label='Email Address'
-                placeholder='email'
-                className={
-                  'form-control' +
-                  (errors.email && touched.email ? ' is-invalid' : '')
-                }
+                id="email"
+                name="email"
+                type="email"
+                label="Email Address"
+                placeholder="email"
+                className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
                 component={InputField}
               />
-              <ErrorMessage
-                name='email'
-                component='div'
-                className='invalid-feedback'
-              />
+              <ErrorMessage name="email" component="div" className="invalid-feedback" />
               {/* <Field
                 id='name'
                 name='name'
@@ -87,19 +76,17 @@ const Register: NextPage = () => {
                 className='invalid-feedback'
               /> */}
               <Field
-                id='password'
-                name='password'
-                label='Password'
-                placeholder='password'
-                type='password'
+                id="password"
+                name="password"
+                label="Password"
+                placeholder="password"
+                type="password"
                 component={InputField}
               />
-              <ErrorMessage
-                name='password'
-                component='div'
-                className='invalid-feedback'
-              />
-              <button className="submit-button" type="submit">Submit</button>
+              <ErrorMessage name="password" component="div" className="invalid-feedback" />
+              <button className="submit-button" type="submit">
+                Submit
+              </button>
             </Form>
           )}
         </Formik>
@@ -119,8 +106,7 @@ const Register: NextPage = () => {
           background-color: #fff;
           transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
           border-radius: 16px;
-          box-shadow: rgb(0 0 0 / 70%) 0px 0px 1px 0px,
-            rgb(0 0 0 / 50%) 0px 3px 4px -2px;
+          box-shadow: rgb(0 0 0 / 70%) 0px 0px 1px 0px, rgb(0 0 0 / 50%) 0px 3px 4px -2px;
           background-image: none;
           overflow: hidden;
           padding: 65px 55px 55px 55px;
@@ -141,10 +127,10 @@ const Register: NextPage = () => {
           height: 50px;
           outline: none !important;
           border: none;
-          background-image: linear-gradient(to top, #5227ff, #7409fc);
+          background-image: linear-gradient(to top, #16a637, #e8f5e9);
         }
         .submit-button:hover {
-          background-image: linear-gradient(to top, #7409fc, #5227ff);
+          background-image: linear-gradient(to top, #e8f5e9, #16a637);
           opacity: 0.8;
         }
         .register-title {
@@ -161,6 +147,6 @@ const Register: NextPage = () => {
       `}</style>
     </div>
   );
-}
+};
 
 export default Register;

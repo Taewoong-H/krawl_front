@@ -19,6 +19,7 @@ export const InputField = ({ field, form: _, ...props }: FieldProps & InputProps
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 10,
           fontSize: 16,
+          fontFamily: 'none',
           color: '#333',
           width: '100%',
           height: 55,
