@@ -98,8 +98,8 @@ const ContentsPage: NextPage = (props: any) => {
       <header>
         <NavBar userInfo={userInfo}></NavBar>
       </header>
-      <main>
-        <div className="">
+      <main className="main pt-4">
+        <div className="container">
           <div className="card-user row ms-1">
             <Image
               src={props.contentResult.profile_img}
