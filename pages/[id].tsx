@@ -48,16 +48,18 @@ const HomePage: NextPage = (props: any) => {
       <Seo title="home"></Seo>
       <header>
         <NavBar userInfo={userInfo}></NavBar>
-        <Competition isContent={true}></Competition>
       </header>
-      <main>
-        <div className="row">
-          <div>
-            <ContentList content={props.contentsResult}></ContentList>
+      <main className="main pt-4">
+        <div className="container">
+          <Competition isContent={true}></Competition>
+          <div className="row">
+            <div>
+              <ContentList content={props.contentsResult}></ContentList>
+            </div>
           </div>
+          <Pagination pages={props.pages}></Pagination>
         </div>
       </main>
-      <Pagination pages={props.pages}></Pagination>
       <style jsx>
         {`
           @media (min-width: 768px) {

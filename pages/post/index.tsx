@@ -93,10 +93,10 @@ const Post: NextPage = (props: any) => {
       <Seo title="home"></Seo>
       <header>
         <NavBar userInfo={userInfo}></NavBar>
-        <Competition isContent={false}></Competition>
       </header>
-      <main>
+      <main className="main pt-4">
         <div className="container">
+          <Competition isContent={false}></Competition>
           <div className="input-group mb-3">
             <input
               type="text"

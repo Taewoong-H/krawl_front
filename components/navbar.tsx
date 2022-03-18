@@ -11,39 +11,74 @@ const NavBar = ({ userInfo }: any) => {
     router.reload();
   };
   return (
-    <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-      <Link href="/home">
-        <a className="d-flex align-items-center text-decoration-none fs-4 text-black bold">
-          <Image src="/image/krawl-logo-new.png" alt="logo-image" className="col" width={50} height={50}></Image>
-        </a>
-      </Link>
-      {userInfo.nickname ? (
-        <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-          <a className="me-0 py-1 my-auto text-decoration-none">
-            <Image
-              src={userInfo.profileImage}
-              alt="profile-image"
-              className="profile-image col"
-              width={35}
-              height={35}
-            ></Image>
-          </a>
-          <span className="mx-2 py-1 my-auto text-decoration-none navbar-text">{userInfo.nickname}</span>
-          <a className="py-2 my-auto text-decoration-none logout navbar-text text-black" onClick={logout}>
-            로그아웃
-          </a>
-        </nav>
-      ) : (
-        <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-          <Link href="/login">
-            <a className="py-2 text-decoration-none navbar-text text-black">로그인</a>
-          </Link>
-        </nav>
-      )}
+    <nav className="navbar navbar-expand-md navbar-light bg-white absolute-top">
+      <div className="container">
+        <button
+          className="navbar-toggler order-2 order-md-1"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse"
+          aria-controls="navbar-left navbar-right"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <Link href="/home">
+          <Image
+            src="/image/krawl-logo-new.png"
+            alt="logo-image"
+            className="navbar-brand mx-auto order-1 order-md-3 logo-link"
+            width={50}
+            height={50}
+          ></Image>
+        </Link>
+        {userInfo.nickname ? (
+          <div className="collapse navbar-collapse order-4 order-md-4">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item text-center">
+                <Image
+                  src={userInfo.profileImage}
+                  alt="profile-image"
+                  className="profile-image nav-link text-decoration-none"
+                  width={35}
+                  height={35}
+                ></Image>
+              </li>
+              <li className="nav-item text-center">
+                <span className="nav-link text-decoration-none text-black">{userInfo.nickname}</span>
+              </li>
+              <li className="nav-item text-center">
+                <a className="nav-link text-decoration-none logout text-black" onClick={logout}>
+                  로그아웃
+                </a>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div className="collapse navbar-collapse order-4 order-md-4" id="navbar-right">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item text-center">
+                <Link href="/login">
+                  <a className="py-2 text-decoration-none navbar-text text-black">로그인</a>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
+
       <style jsx global>
         {`
-          .header {
-            border-bottom: 1px solid #e5e5e5;
+          .navbar,
+          .navbar * {
+            transition: all 0.25s ease-in-out;
+          }
+          .navbar {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          }
+          .logo-link {
+            cursor: pointer;
           }
           .logout {
             cursor: pointer;
@@ -53,7 +88,7 @@ const NavBar = ({ userInfo }: any) => {
           }
         `}
       </style>
-    </div>
+    </nav>
   );
 };
 
