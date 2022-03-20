@@ -9,7 +9,7 @@ const ContentList = ({ content }: any) => {
         const itemDate = new Date(item.raw_date);
         const calcYear = today.getFullYear() - itemDate.getFullYear();
         return (
-          <div className="card mb-3" key={item.id}>
+          <div className="card mb-3 list-card" key={item.id}>
             <Link href={`/contents/${item.id}`}>
               <div className="row g-0">
                 <div className="col-md-4">
@@ -22,9 +22,9 @@ const ContentList = ({ content }: any) => {
                 <div className="col-md-8 card-container">
                   <div className="card-body">
                     <br />
-                    <h4 className="card-title">{item.ogTitle}</h4>
+                    <h4 className="card-title list-card-title">{item.ogTitle}</h4>
                     <br />
-                    <p className="card-text">
+                    <p className="card-text list-card-text">
                       {item.opinion && item.opinion !== '' ? (
                         <>
                           {item.opinion.split('\n').map((line: any, index: number) => {
@@ -62,10 +62,10 @@ const ContentList = ({ content }: any) => {
         );
       })}
       <style jsx global>{`
-        .card {
+        .list-card {
           cursor: pointer;
         }
-        .card:hover {
+        .list-card:hover {
           box-shadow: 1px 1px 20px #ddd;
         }
         .card-container {
@@ -75,13 +75,13 @@ const ContentList = ({ content }: any) => {
           width: 100%;
           height: 15rem;
         }
-        .card-title {
+        .list-card-title {
           width: 80%;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
         }
-        .card-text {
+        .list-card-text {
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
