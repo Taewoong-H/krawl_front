@@ -5,6 +5,7 @@ import Seo from '../components/seo';
 import Competition from '../components/home/competition';
 import ContentList from '../components/home/contentList';
 import Pagination from '../components/home/pagination';
+import AsideBar from '../components/home/aside';
 import { useEffect, useState } from 'react';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
@@ -51,12 +52,18 @@ const HomePage: NextPage = (props: any) => {
       </header>
       <main className="main pt-4">
         <div className="container">
-          <Competition isContent={true}></Competition>
           <div className="row">
-            <div>
-              <ContentList content={props.contentsResult}></ContentList>
+            <div className="col-md-9">
+              <Competition isContent={true}></Competition>
+              <div>
+                <ContentList content={props.contentsResult}></ContentList>
+              </div>
+            </div>
+            <div className="col-md-3 ms-auto">
+              <AsideBar contents={props.popularContentsResult}></AsideBar>
             </div>
           </div>
+
           <Pagination pages={props.pages}></Pagination>
         </div>
       </main>
@@ -75,7 +82,7 @@ const HomePage: NextPage = (props: any) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
+    paths: [{ params: { id: '1' } }],
     fallback: true, // false or 'blocking'
   };
 };
@@ -109,12 +116,30 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
         : contentsRes.count / contentsRes.results.length + 1;
   }
 
+  const popularContentsRes = await (await fetch(`${process.env.API_URL}/contents/get-popular-posts`)).json();
+  const popularContentsResult = await Promise.all(
+    popularContentsRes.map(async (content: any) => {
+      const options = { url: content.url };
+      let ogImage = '';
+      let ogTitle = '끌올 제목 미상';
+      let ogDescription = '끌올 설명 미상';
+      await ogs(options, (error: boolean, results: any, response) => {
+        if (!error) {
+          ogImage = results.ogImage.url ? results.ogImage.url : '';
+          ogTitle = results.ogTitle ? results.ogTitle : '끌올 제목 미상';
+          ogDescription = results.ogDescription ? results.ogDescription : '끌올 설명 미상';
+        }
+      });
+      return { ...content, ogImage, ogTitle, ogDescription };
+    })
+  );
+
   return {
     props: {
       // isCookie,
-      contentsRes,
       contentsResult,
       pages,
+      popularContentsResult,
     },
     revalidate: 30,
   };

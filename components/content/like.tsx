@@ -58,7 +58,7 @@ const Like = ({ propBody }: any) => {
           )}
         </div>
       </li>
-      <li className="mx-1">
+      <li className="mx-2">
         <div>
           <ShareAltOutlined style={{ fontSize: '30px' }} />
         </div>

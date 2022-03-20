@@ -25,13 +25,15 @@ const NavBar = ({ userInfo }: any) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <Link href="/home">
-          <Image
-            src="/image/krawl-logo-new.png"
-            alt="logo-image"
-            className="navbar-brand mx-auto order-1 order-md-3 logo-link"
-            width={50}
-            height={50}
-          ></Image>
+          <a className="logo-link">
+            <Image
+              src="/image/krawl-logo-new.png"
+              alt="logo-image"
+              className="navbar-brand mx-auto order-1 order-md-3"
+              width={50}
+              height={50}
+            ></Image>
+          </a>
         </Link>
         {userInfo.nickname ? (
           <div className="collapse navbar-collapse order-4 order-md-4">
@@ -79,6 +81,7 @@ const NavBar = ({ userInfo }: any) => {
           }
           .logo-link {
             cursor: pointer;
+            height: 50px;
           }
           .logout {
             cursor: pointer;

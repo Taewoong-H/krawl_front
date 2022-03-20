@@ -5,7 +5,7 @@ const Competition = ({ isContent }: any) => {
     <div className="pricing-header p-3 pb-md-2 mx-auto my-3 row align-items-end justify-content-between">
       {isContent ? (
         <div className="col-auto">
-          <h3>5년 이상 묵힌 콘텐츠만 취급</h3>
+          <h1 className="fw-bolder">5년 이상 묵힌 콘텐츠만 취급.</h1>
           <p className="fs-6 text-muted">
             우리는 따끈따끈한 정보를 좆지 않습니다. 곰팡내도 좀 나고 먼지도 쌓인,
             <br /> 하지만 여전히 번뜩이는 통찰력을 가진 콘텐츠만을 취급합니다.
