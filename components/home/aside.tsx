@@ -8,13 +8,11 @@ const AsideBar = ({ contents }: any) => {
         <div className="card mb-4 aside-card">
           <div className="card-body">
             <h4 className="card-title fw-bolder">About</h4>
-            <p className="card-text">
+            <p className="card-text fw-light text-muted about">
               세상에는 새로운 콘텐츠가 (말 그대로) 넘쳐납니다.
               <br />
-              새롭게 생겨나는 콘텐츠에 사람들의 시선이 쏠리는 게 당연하지만, 우리는 그로 인해 외면받는 부분을 조명하고자
-              합니다. 발행된지는 오래되었지만 그냥 묻히기에는 너무 아까운 콘텐츠들 말입니다. 마치 고전 작품처럼요.
-              <br />
-              무려 5년이 넘은 콘텐츠들을 소개합니다!
+              우리는 그로 인해 외면받는 부분을 조명하고자 합니다. 발행된지는 오래되었지만, 그냥 묻히기에는 아까운
+              콘텐츠들 말입니다. 마치 고전 작품처럼요.
             </p>
           </div>
         </div>
@@ -51,6 +49,9 @@ const AsideBar = ({ contents }: any) => {
           border: 0 solid rgba(0, 0, 0, 0.125);
           border-bottom: 1px solid rgba(0, 0, 0, 0.1);
           padding: 10px;
+        }
+        .about {
+          font-size: 0.9rem;
         }
         .content-text {
           cursor: pointer;

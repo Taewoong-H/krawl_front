@@ -82,7 +82,7 @@ const HomePage: NextPage = (props: any) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [{ params: { id: '1' } }],
+    paths: [{ params: { id: '1' } }], // id 값 fetch해서 불러올수 있게끔
     fallback: true, // false or 'blocking'
   };
 };

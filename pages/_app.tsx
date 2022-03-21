@@ -12,32 +12,30 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
       <footer className="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div className="col-md-4 d-flex align-items-center">
-          <Link href="/">
-            <a className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">끌올</a>
+          <Link href="/home">
+            <a className="me-2 mb-md-0 text-muted text-decoration-none lh-1">끌올</a>
           </Link>
           <span className="text-muted">© 2022 사국회, Inc.</span>
         </div>
         <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
           <li className="ms-3">
-            <Link href="/">
+            <Link href="/home">
               <a className="text-muted">
                 <Image src="/image/twitter.svg" alt="twitter" width={24} height={21} />
               </a>
             </Link>
           </li>
           <li className="ms-3">
-            <Link href="/">
+            <Link href="/home">
               <a className="text-muted">
-                <Image src="/image/instagram.svg" alt="twitter" width={24} height={21} />
+                <Image src="/image/instagram.svg" alt="instagram" width={24} height={21} />
               </a>
             </Link>
           </li>
           <li className="ms-3">
-            <Link href="/">
-              <a className="text-muted">
-                <Image src="/image/github.svg" alt="twitter" width={24} height={21} />
-              </a>
-            </Link>
+            <a className="text-muted" href="https://github.com/Taewoong-H/krawl_front">
+              <Image src="/image/github.svg" alt="github" width={24} height={21} />
+            </a>
           </li>
         </ul>
       </footer>
