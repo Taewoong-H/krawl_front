@@ -3,12 +3,9 @@
 > 세상에는 새로운 콘텐츠가 (말 그대로) 넘쳐납니다.<br>
 > 우리는 그로 인해 외면받는 부분을 조명하고자 합니다. 발행된지는 오래되었지만, 그냥 묻히기에는 아까운 콘텐츠들 말입니다. 마치 고전 작품처럼요.
 
-<img src="https://img.shields.io/badge/Django-092E20?
-          style=flat&logo=Django&logoColor=white"/>
-<img src="https://img.shields.io/badge/Next.js-000000?
-          style=flat&logo=Next.js&logoColor=white"/>
-<img src="https://img.shields.io/badge/TypeScript-3178C6?
-          style=flat&logo=TypeScript&logoColor=white"/>
+<img src="https://img.shields.io/badge/Django-092E20?style=flat&logo=Django&logoColor=white"/>
+<img src="https://img.shields.io/badge/Next.js-000000?style=flat&logo=Next.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
 
 5년 이상 묵힌 콘텐츠만 취급합니다.<br>
 끌올은 따끈따끈한 정보를 좇지 않습니다. 곰팡내도 좀 나고 먼지도 쌓인,<br>
@@ -18,6 +15,7 @@
 
 ## 프로젝트 소개
 
+- 홈페이지: https://www.krawl.xyz/
 - 프로젝트 PCD문서: https://www.notion.so/Product-Context-Document-22a50642b0bd45458d4d1af576b1925d
 - 백엔드: https://github.com/RyanYJOh/krawl_back
 - 블로그: https://brunch.co.kr/@yyjo1104/119
