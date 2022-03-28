@@ -62,7 +62,9 @@ const Register: NextPage = () => {
                 className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
                 component={InputField}
               />
-              <ErrorMessage name="email" component="div" className="invalid-feedback" />
+              <ErrorMessage name="email" component="div" className="invalid-feedback">
+                {(msg) => <div className="error-message">{msg}</div>}
+              </ErrorMessage>
               {/* <Field
                 id='name'
                 name='name'
@@ -83,7 +85,9 @@ const Register: NextPage = () => {
                 type="password"
                 component={InputField}
               />
-              <ErrorMessage name="password" component="div" className="invalid-feedback" />
+              <ErrorMessage name="password" component="div" className="invalid-feedback">
+                {(msg) => <div className="error-message">{msg}</div>}
+              </ErrorMessage>
               <button className="submit-button" type="submit">
                 Submit
               </button>
@@ -143,6 +147,13 @@ const Register: NextPage = () => {
           line-height: 1.2;
           text-align: center;
           font-weight: bold;
+        }
+        .error-message {
+          width: 100%;
+          padding-left: 7px;
+          margin-top: 0.25rem;
+          font-size: 0.875em;
+          color: #dc3545;
         }
       `}</style>
     </div>
